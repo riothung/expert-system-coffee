@@ -15,4 +15,58 @@ model User {
   email String @unique
   password String
   isAdmin Boolean @default(false)
+  washed PascaPanenWashed?
 }
+
+model Variabel {
+  id Int @id @default(autoincrement())
+  variabel String
+  pascaPanen String
+}
+
+model ciriVariabel {
+    id Int @id @default(autoincrement())
+    ciri String
+    id_variabel Int
+    variabels Variabel[] @relation(fields: [id_variabel], references: [id])
+    pasca_panen String
+    bobot Int
+  }
+
+model PascaPanen {
+    id Int @id @default(autoincrement())
+    type String
+  }
+
+model PascaPanenWashed {
+    id Int @id @default(autoincrement())
+    id_user Int @unique
+    user User[] @relation(fields: [id_user], references:[id])
+    id_ciri Int
+    ciriVariabel CiriVariabel[] @relation(fields: [id_ciri], references: [id])
+  }
+
+model PascaPanenNatural {
+    id Int @id @default(autoincrement())
+    id_user Int @unique
+    user User[] @relation(fields: [id_user], references:[id])
+    id_ciri Int
+    ciriVariabel CiriVariabel[] @relation(fields: [id_ciri], references: [id])
+  }
+
+model PascaPanenHoney {
+    id Int @id @default(autoincrement())
+    id_user Int @unique
+    user User[] @relation(fields: [id_user], references:[id])
+    id_ciri Int
+    ciriVariabel CiriVariabel[] @relation(fields: [id_ciri], references: [id])
+  }
+
+model HasilPengujian {
+    id Int @id @default(autoincrement())
+    id_pascaPanen Int
+    pascaPanen PascaPanenNatural[] @relation(fields: [id_pascaPanen])
+    id_user
+  }
+
+
