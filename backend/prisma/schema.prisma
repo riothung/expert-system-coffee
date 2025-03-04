@@ -15,58 +15,52 @@ model User {
   email String @unique
   password String
   isAdmin Boolean @default(false)
-  washed PascaPanenWashed?
+  hasilPengujian HasilPengujian[]
 }
 
 model Variabel {
   id Int @id @default(autoincrement())
+  kode String
   variabel String
-  pascaPanen String
+  pasca_panen String
+  ciriVariabel CiriVariabel[]
 }
 
-model ciriVariabel {
+model CiriVariabel {
     id Int @id @default(autoincrement())
-    ciri String
+    kode String
+    ciri String @db.Text
     id_variabel Int
-    variabels Variabel[] @relation(fields: [id_variabel], references: [id])
+    variabel Variabel @relation(fields: [id_variabel], references: [id])
     pasca_panen String
-    bobot Int
+    // bobot Int
+    pengujian Pengujian[]
   }
 
-model PascaPanen {
-    id Int @id @default(autoincrement())
-    type String
-  }
-
-model PascaPanenWashed {
-    id Int @id @default(autoincrement())
-    id_user Int @unique
-    user User[] @relation(fields: [id_user], references:[id])
-    id_ciri Int
-    ciriVariabel CiriVariabel[] @relation(fields: [id_ciri], references: [id])
-  }
-
-model PascaPanenNatural {
-    id Int @id @default(autoincrement())
-    id_user Int @unique
-    user User[] @relation(fields: [id_user], references:[id])
-    id_ciri Int
-    ciriVariabel CiriVariabel[] @relation(fields: [id_ciri], references: [id])
-  }
-
-model PascaPanenHoney {
-    id Int @id @default(autoincrement())
-    id_user Int @unique
-    user User[] @relation(fields: [id_user], references:[id])
-    id_ciri Int
-    ciriVariabel CiriVariabel[] @relation(fields: [id_ciri], references: [id])
-  }
+model Pengujian {
+  id Int @id @default(autoincrement())
+  id_ciriVariabel Int
+  ciriVariabel CiriVariabel @relation(fields: [id_ciriVariabel], references: [id])
+  // bobot Int
+  // output String
+  // id_saran Int
+  id_hasilPengujian Int
+  hasilPengujian HasilPengujian @relation(fields: [id_hasilPengujian], references: [id])
+}
 
 model HasilPengujian {
     id Int @id @default(autoincrement())
-    id_pascaPanen Int
-    pascaPanen PascaPanenNatural[] @relation(fields: [id_pascaPanen])
-    id_user
+    date DateTime @default(now())
+    id_user Int
+    user User @relation(fields: [id_user], references: [id])
+    score Int
+    output String
+    pengujian Pengujian[]
   }
+
+// model Saran {
+//   id Int @id @default(autoincrement())
+//   id_saran String
+// }
 
 
