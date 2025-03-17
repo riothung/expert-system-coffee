@@ -57,9 +57,7 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-            <span>Petunjuk Penggunaan</span>
-          </a>
+          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities"> <span>Petunjuk Penggunaan</span> </a>
         </li>
 
         <li class="nav-item">
@@ -79,7 +77,7 @@
             <span>Pengujian</span>
           </a>
         </li>
-        
+
         <li class="nav-item">
           <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
             <span>Hasil Pengujian</span>
@@ -156,29 +154,78 @@
           </nav>
           <!-- End of Topbar -->
 
-          <h2 class="text-center mb-4">SISTEM PAKAR MENENTUKAN KUALITAS KOPI <br> JENIS ARABIKA PADA SETIAP PASCA PANEN</h2>
+          <h1 class="text-center mb-4">Silahkan Pilih Pasca Panen</h1>
 
-          <div class="justify-content-center ml-4 mr-4">
-            <p class="text-justify" >
-            Di antara berbagai jenis kopi, Arabika menorehkan sejarah sebagai kopi pertama yang menjejakkan kakinya di tanah air. 
-            Biji kopi ini berkembang pesat di ketinggian ideal antara 1.000 hingga 1.200 meter di atas permukaan laut. 
-            Semakin tinggi lokasi penanaman, semakin istimewa pula rasa yang dihasilkan dari biji kopi ini.
-            Namun, di balik keunggulannya, kopi Arabika menyimpan kelemahan. 
-            Biji kopi ini mudah terserang penyakit karat daun yang disebabkan oleh jamur Hemileia vastatrix, 
-            terutama pada ketinggian di bawah 600 hingga 700 meter di atas permukaan laut. 
-            Penyakit ini dapat berakibat fatal, menurunkan hasil panen dan kualitas biji kopi.
-            </p>
+          <!-- Button trigger modal -->
+          <div class="d-flex justify-content-center gap-3">
+            <button type="button" class="btn btn-primary btn-lg px-4 py-2 ml-3" data-bs-toggle="modal" data-bs-target="#naturalModal">Natural</button>
+            <button type="button" class="btn btn-primary btn-lg px-4 py-2 ml-3" data-bs-toggle="modal" data-bs-target="#honeyModal">Honey</button>
+            <button type="button" class="btn btn-primary btn-lg px-4 py-2 ml-3" data-bs-toggle="modal" data-bs-target="#washedModal">Washed</button>
+          </div>
 
-            <p style="text-align: center; text-justify: inter-word; font-weight: bold;" class="mb-4">
-              Sistem pakar adalah suatu sistem yang berupaya mentransfer pengetahuan manusia ke komputer sehingga komputer tersebut 
-              dapat memecahkan masalah dengan cara yang biasa dilakukan para pakar
-            </p>
-            
-            <div class="text-center">
-              <a href="pengujian.html" class="btn btn-danger btn-md px-4 py-2 w-25" style="opacity: 0.8; transition: 0.3s;">Mulai</a>
+          <!-- Modal Natural -->
+          <div class="modal fade" id="naturalModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Modal Natural</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form id="pengujianNatural">
+                    <label for="aroma"
+                      >Fragrance/Aroma Aroma menjadi lebih intens dan kaya setelah tahapan break (4 menit setelah terkena air panas)
+                      <input class="form-check-input" type="checkbox" value="" name="31" class="jawaban" />
+                      <span><b>Ya</b></span>
+                    </label>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
             </div>
           </div>
 
+          <!-- Modal Honey -->
+          <div class="modal fade" id="honeyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Modal Honey</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form id="pengujianHoney"></form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal Washed -->
+          <div class="modal fade" id="washedModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Modal Washed</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form id="pengujianWashed"></form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <!-- End of Main Content -->
 
@@ -193,6 +240,7 @@
         <!-- End of Footer -->
       </div>
       <!-- End of Content Wrapper -->
+      <!-- </div> -->
     </div>
     <!-- End of Page Wrapper -->
 
@@ -219,53 +267,25 @@
         </div>
       </div>
     </div>
-    
-    <!-- <script>
-      
-      function openChildModal(modalId) {
-        let parentModal = new bootstrap.Modal(document.getElementById('mulaiModal'));
-        console.log(modalId)
-        // let closeParentModal = button.getAttribute('data-bs-dismiss')
-        let childModal = new bootstrap.Modal(document.getElementById(modalId));
-        // parentModal.hide(); // Hide parent modal
-        
-        // Add delay biar parent modal beneran tertutup dulu
-        // if(childModal){
-          //   console.log(closeParentModal)
-          //   console.log("test")  
-          //   closeParentModal
-          //     // closeParentModal
-          //     }  
-          
-          setTimeout(() => {
-             // Show child modal
-            if(childModal.show()){
-              
-            }
-            // console.log("test", childModal)
-          }, 500); // Delay 0.5 detik biar smooth
-          // childModal._config.backdrop = 'static';
-      // childModal._config.keyboard = false;
-    }
 
-    </script> -->
+    <script src="pengujian.js"></script>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="vendor/jquery/jquery.min.js"></script> -->
+    <!-- <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- <script src="vendor/jquery-easing/jquery.easing.min.js"></script> -->
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <!-- <script src="js/sb-admin-2.min.js"></script> -->
 
     <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
+    <!-- <script src="vendor/chart.js/Chart.min.js"></script> -->
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script> -->
   </body>
 </html>
