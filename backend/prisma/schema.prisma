@@ -3,10 +3,16 @@ generator client {
 }
 
 // supabase connection
+// datasource db {
+//   provider = "postgresql"
+//   url      = env("DATABASE_URL")
+//   directUrl = env("DIRECT_URL")
+// }
+
+// XAMPP connection
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
 }
 
 model User {
@@ -33,7 +39,7 @@ model CiriVariabel {
     id_variabel Int
     variabel Variabel @relation(fields: [id_variabel], references: [id])
     pasca_panen String
-    // bobot Int
+    bobot Int?
     pengujian Pengujian[]
   }
 
@@ -44,6 +50,7 @@ model Pengujian {
   // bobot Int
   // output String
   // id_saran Int
+  // bobot Int
   id_hasilPengujian Int
   hasilPengujian HasilPengujian @relation(fields: [id_hasilPengujian], references: [id])
 }
