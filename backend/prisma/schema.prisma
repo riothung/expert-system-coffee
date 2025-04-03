@@ -45,6 +45,7 @@ model CiriVariabel {
 
 model Pengujian {
   id Int @id @default(autoincrement())
+  form String
   id_ciriVariabel Int
   ciriVariabel CiriVariabel @relation(fields: [id_ciriVariabel], references: [id])
   // bobot Int

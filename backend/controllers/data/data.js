@@ -117,6 +117,49 @@ const insertCiriVariabel = async (req, res) => {
   }
 };
 
+const insertPengujian = async (req, req) => {
+  try {
+    const dataPengujian = req.body.form;
+    const insertHasilPengujian = await prisma.hasilPengujian.create({
+      date: new Date(),
+      user: { connect: { id: 1 } },
+      score: dataPengujian.score,
+    });
+
+    const formattedDate = new Date(newKonsul.date).toISOString().split("T")[0];
+
+    console.log(dataPengujian);
+
+    const keys = Object.keys(dataPengujian);
+    if (dataPengujian) {
+      for (let i = 0; i < keys.length; i++) {
+        const key = keys[i];
+        const value = dataPengujian[key];
+
+        const pengujianUser = {
+          id_ciriVariabel: parseInt(key),
+          id_hasilPengujian: insertHasilPengujian.id,
+          form: String(value),
+        };
+
+        await prisma.pengujian.create({ data: pengujianUser });
+        console.log(pengujianUser);
+      }
+    }
+
+    return res.status(200).json({
+      message: "Data inserted successfully",
+      data: {
+        ...insertHasilPengujian,
+        date: formattedDate,
+      },
+    });
+  } catch (e) {
+    console.error(e);
+    return res.status(400).json({ message: e.message });
+  }
+};
+
 // End of POST method
 
 // GET Method
@@ -187,6 +230,7 @@ module.exports = {
   insertUser,
   insertVariabel,
   insertCiriVariabel,
+  insertPengujian,
   getVariabel,
   getCiriVariabel,
   getDataNatural,

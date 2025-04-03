@@ -16,6 +16,7 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" />
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" /> -->
   </head>
 
   <body id="page-top">
@@ -168,30 +169,33 @@
             <div class="modal-dialog modal-xl">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Modal Natural</h1>
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Cupping Form Pasca Panen Natural</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" style="margin-left: 10px">
                   <form id="pengujianNatural">
                     <!-- Aroma -->
                     <h5>Fragrance/Aroma</h5>
-                    <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px"
-                      >Aroma menjadi lebih intens dan kaya setelah tahapan break (4 menit setelah terkena air panas)
-                      <input class="form-check-input" type="checkbox" value="80" name="35" class="ciriVariabel" />
-                      <span><b>Ya</b></span>
-                    </label>
-                    <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px"
-                      >Aroma cenderung tetap sama seperti saat pertama terkena air panas tanpa adanya peningkatan intensitas maupun variasi aroma yang signifikan saat tahapan break (4 menit setelah terkena air panas)
-                      <input class="form-check-input" type="checkbox" value="70" name="36" class="ciriVariabel" />
-                      <span><b>Ya</b></span>
-                    </label>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="80" name="35" class="aroma" />
+                      <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px"
+                        >Aroma menjadi lebih intens dan kaya setelah tahapan break (4 menit setelah terkena air panas)
+                        <!-- <span><b>Ya</b></span> -->
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="70" name="36" class="aroma" />
+                      <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px"
+                        >Aroma cenderung tetap sama seperti saat pertama terkena air panas tanpa adanya peningkatan intensitas maupun variasi aroma yang signifikan saat tahapan break (4 menit setelah terkena air panas)
+                      </label>
+                    </div>
                     <!-- Aroma -->
 
                     <!-- Natural Acid -->
                     <h5>Natural Acid</h5>
                     <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px"
                       >Rasa asam yang lembut seperti asam stroberi, plum, blueberry, atau wine-like acidity.
-                      <select class="form-select" aria-label="Default select example" name="37">
+                      <select class="form-select" aria-label="Default select example" name="37" required>
                         <option value="" disabled selected hidden>Beri Nilai</option>
                         <option value="60">60</option>
                         <option value="70">70</option>
@@ -203,105 +207,141 @@
 
                     <!-- Body -->
                     <h5>Body</h5>
-                    <div class="mb-3">
-                      <label class="form-check-label">
-                        Meninggalkan jejak rasa tebal yang lebih lama di mulut
-                        <input type="checkbox" class="form-check-input ciriVariabel" value="80" name="40" />
-                        <span><b>Ya</b></span>
-                      </label>
-                      <label class="form-check-label">
-                        Meninggalkan kesan rasa sweetness yang tebal dan lama di mulut
-                        <input type="checkbox" class="form-check-input ciriVariabel" value="90" name="41" />
-                        <span><b>Ya</b></span>
-                      </label>
-                      <label class="form-check-label">
-                        Terasa lebih ringan di mulut dengan sensasi kurang tebal
-                        <input type="checkbox" class="form-check-input ciriVariabel" value="70" name="42" />
-                        <span><b>Ya</b></span>
-                      </label>
-                      <label class="form-check-label">
-                        Tidak meninggalkan jejak rasa yang lama
-                        <input type="checkbox" class="form-check-input ciriVariabel" value="60" name="43" />
-                        <span><b>Ya</b></span>
-                      </label>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input ciriVariabel" value="80" name="40" />
+                      <label class="form-check-label"> Meninggalkan jejak rasa tebal yang lebih lama di mulut </label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input ciriVariabel" value="90" name="41" />
+                      <label class="form-check-label"> Meninggalkan kesan rasa sweetness yang tebal dan lama di mulut </label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input ciriVariabel" value="70" name="42" />
+                      <label class="form-check-label"> Terasa lebih ringan di mulut dengan sensasi kurang tebal </label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input ciriVariabel" value="60" name="43" />
+                      <label class="form-check-label"> Tidak meninggalkan jejak rasa yang lama </label>
                     </div>
                     <!-- Body -->
 
                     <!-- Aftertaste -->
                     <h5>Aftertaste</h5>
-                    <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px"
-                      >Rasa yang ditinggalkan halus dan tidak mengganggu di mulut
+                    <div class="form-check">
                       <input class="form-check-input" type="checkbox" value="80" name="44" class="ciriVariabel" />
-                      <span><b>Ya</b></span>
-                    </label>
-                    <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px"
-                      >Rasa yang ditinggalkan menonjolkan nuansa manis, floral, atau fruity yang tidak mendominasi
+                      <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px">Rasa yang ditinggalkan halus dan tidak mengganggu di mulut </label>
+                    </div>
+                    <div class="form-check">
                       <input class="form-check-input" type="checkbox" value="90" name="45" class="ciriVariabel" />
-                      <span><b>Ya</b></span>
-                    </label>
-                    <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px"
-                      >Rasa yang ditinggalkan cenderung tidak harmonis misalnya rasa asam yang lebih mendominasi ataupun pahit berlebih
+                      <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px">Rasa yang ditinggalkan menonjolkan nuansa manis, floral, atau fruity yang tidak mendominasi </label>
+                    </div>
+                    <div class="form-check">
                       <input class="form-check-input" type="checkbox" value="60" name="46" class="ciriVariabel" />
-                      <span><b>Ya</b></span>
-                    </label>
-                    <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px"
-                      >Rasa yang ditinggalkan cenderung lebih cepat di mulut
+                      <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px">Rasa yang ditinggalkan cenderung tidak harmonis misalnya rasa asam yang lebih mendominasi ataupun pahit berlebih </label>
+                    </div>
+                    <div class="form-check">
                       <input class="form-check-input" type="checkbox" value="70" name="47" class="ciriVariabel" />
-                      <span><b>Ya</b></span>
-                    </label>
+                      <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px">Rasa yang ditinggalkan cenderung lebih cepat di mulut </label>
+                    </div>
                     <!-- Aftertaste -->
 
                     <!-- Flavor -->
                     <h5>Flavor</h5>
-                    <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px"
-                      >Rasa/flavor menampilkan beragam elemen rasa yang terasa secara bertahap dan berlapis-lapis
+                    <div class="form-check">
                       <input class="form-check-input" type="checkbox" value="80" name="48" class="ciriVariabel" />
-                      <span><b>Ya</b></span>
-                    </label>
-                    <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px"
-                      >Memiliki kombinasi rasa yang kaya seperti buah-buahan, floral, rempah, dan manis
+                      <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px">Rasa/flavor menampilkan beragam elemen rasa yang terasa secara bertahap dan berlapis-lapis </label>
+                    </div>
+                    <div class="form-check">
                       <input class="form-check-input" type="checkbox" value="90" name="49" class="ciriVariabel" />
-                      <span><b>Ya</b></span>
-                    </label>
-                    <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px"
-                      >Rasa/flavor memiliki lapisan rasa yang sedikit dan cenderung lebih dominan pada salah satu rasa misalnya asam atau manis
+                      <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px">Memiliki kombinasi rasa yang kaya seperti buah-buahan, floral, rempah, dan manis </label>
+                    </div>
+                    <div class="form-check">
                       <input class="form-check-input" type="checkbox" value="70" name="50" class="ciriVariabel" />
-                      <span><b>Ya</b></span>
-                    </label>
-                    <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px"
-                      >Rasa yang ada cenderung tidak banyak berubah dari awal sampai akhir tegukan
+                      <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px">Rasa/flavor memiliki lapisan rasa yang sedikit dan cenderung lebih dominan pada salah satu rasa misalnya asam atau manis </label>
+                    </div>
+                    <div class="form-check">
                       <input class="form-check-input" type="checkbox" value="60" name="51" class="ciriVariabel" />
-                      <span><b>Ya</b></span>
-                    </label>
+                      <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px">Rasa yang ada cenderung tidak banyak berubah dari awal sampai akhir tegukan </label>
+                    </div>
                     <!-- Flavor -->
 
                     <!-- Uniformity/Keseragaman -->
                     <h5>Uniformity/Keseragaman</h5>
-                    <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px"
-                      >Memiliki rasa yang konsisten pada setiap seduhan
+                    <div class="form-check">
                       <input class="form-check-input" type="checkbox" value="90" name="52" class="ciriVariabel" />
-                      <span><b>Ya</b></span>
-                    </label>
-                    <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px"
-                      >Rasa dari setiap seduhan berubahubah atau tidak konsisten
+                      <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px">Memiliki rasa yang konsisten pada setiap seduhan </label>
+                    </div>
+                    <div class="form-check">
                       <input class="form-check-input" type="checkbox" value="60" name="53" class="ciriVariabel" />
-                      <span><b>Ya</b></span>
-                    </label>
+                      <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px">Rasa dari setiap seduhan berubahubah atau tidak konsisten </label>
+                    </div>
                     <!-- Uniformity/Keseragaman -->
 
                     <!-- Balance/Keseimbangan -->
                     <h5>Balance/Keseimbangan</h5>
-                    <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px"
-                      >Memiliki rasa pahit, manis, dan asam yang seimbang tanpa adanya rasa yang lebih menonjol
+                    <div class="form-check">
                       <input class="form-check-input" type="checkbox" value="80" name="54" class="ciriVariabel" />
-                      <span><b>Ya</b></span>
-                    </label>
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+                      <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px">Memiliki rasa pahit, manis, dan asam yang seimbang tanpa adanya rasa yang lebih menonjol </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="70" name="55" class="ciriVariabel" />
+                      <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px">Memiliki salah satu rasa yang lebih menonjol dibanding rasa lainnya </label>
+                    </div>
+                    <!-- Balance/Keseimbangan -->
+
+                    <!-- Clean Cup -->
+                    <h5>Clean Cup</h5>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="90" name="56" class="ciriVariabel" />
+                      <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px">Rasa kopi terbebas dari rasa asing, memiliki rasa yang jernih, murni dan tidak ada elemen yang mengganggu </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="80" name="57" class="ciriVariabel" />
+                      <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px">Air, wadah, dan kelengkapan yang digunakan steril dan bersih </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="60" name="58" class="ciriVariabel" />
+                      <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px">Menandakan adanya kontaminasi rasa, seperti rasa tanah atau jamur </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="70" name="59" class="ciriVariabel" />
+                      <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px">Air, wadah, dan kelengkapan yang digunakan tidak steril atau kotor </label>
+                    </div>
+                    <!-- Clean Cup -->
+
+                    <!-- Natural Sweetness -->
+                    <h5>Natural Sweetness</h5>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="80" name="60" class="ciriVariabel" />
+                      <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px">Memiliki rasa manis yang intens dan cenderung seperti rasa manis buah (fruity) </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="90" name="61" class="ciriVariabel" />
+                      <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px">Rasa manis yang dihasilkan terasa seperti manis stroberi, anggur, kismis </label>
+                    </div>
+                    <!-- Natural Sweetness -->
+
+                    <!-- Overall/Total Keseluruhan -->
+                    <h5>Overall/Total Keseluruhan</h5>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="80" name="66" class="ciriVariabel" />
+                      <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px">Semua elemen dalam kopi memberikan pengalaman minum yang memuaskan </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="90" name="67" class="ciriVariabel" />
+                      <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px">Memiliki kesan keseluruhan yang baik dari segi rasa, keseimbangan, dan konsistensi </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="70" name="68" class="ciriVariabel" />
+                      <label class="form-check-label" for="flexCheckDefault" style="margin-bottom: 10px">Memiliki kesan yang kurang memuaskan seperti rasa yang tidak seimbang dan konsistensi yang buruk </label>
+                    </div>
+                    <!-- Overall/Total Keseluruhan -->
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
@@ -389,8 +429,9 @@
     <script src="pengujian.js"></script>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
@@ -403,7 +444,7 @@
     <script src="vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
+    <!-- <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script> -->
   </body>
 </html>
