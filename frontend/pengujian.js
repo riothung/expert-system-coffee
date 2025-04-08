@@ -55,13 +55,13 @@ const formNatural = async (req, res) => {
     let result = {};
 
     checkboxesValues.forEach((value) => {
-      if (value.checked) result[value.name] = value.value;
+      if (value.checked) result[value.name] = parseInt(value.value);
     });
 
     console.log(result);
     const selectFormValue = document.querySelector(".form-select").value;
-    if (selectFormValue) result[37] = selectFormValue;
-    console.log(result[37]);
+    if (selectFormValue) result[37] = parseInt(selectFormValue);
+    console.log(result[37], "ini form select");
 
     function calcScore(score = 0) {
       for (let key in result) {
@@ -71,19 +71,53 @@ const formNatural = async (req, res) => {
     }
 
     const totalScore = calcScore();
-    console.log(totalScore);
+    console.log(totalScore, "ini total score");
 
-    if (totalScore) result["score"] = totalScore;
+    function theOutput(output) {
+      if (totalScore >= 65 && totalScore <= 74) {
+        output += "Kurang Memuaskan";
+        result["score"] = totalScore;
+        result["output"] = output;
+      } else if (totalScore >= 75 && totalScore <= 84) {
+        output += "Memuaskan";
+        result["score"] = totalScore;
+        result["output"] = output;
+      } else if (totalScore >= 85 && totalScore <= 94) {
+        output += "Sangat Memuaskan";
+        result["score"] = totalScore;
+        result["output"] = output;
+      } else {
+        output += "Output tidak ada";
+        result["score"] = totalScore;
+        result["output"] = output;
+      }
+      return output;
+    }
 
-    const postResponse = await fetch("", {
+    const finalOutput = theOutput("");
+    console.log(finalOutput, "ini final output");
+
+    console.log(result.score, "ini score");
+
+    // const jsonTest = JSON.stringify(result);
+    // console.log(jsonTest);
+
+    // const postResponse = await fetch("", {
+    const postResponse = await fetch("http://localhost:3000/api/data/addPengujian", {
       method: "POST",
+      // credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        form: result,
+        form: {
+          ...result,
+        },
       }),
     });
+
+    // const data = await postResponse.json();
+    // console.log(data, "ini data");
     if (postResponse.ok) window.location.reload();
   } catch (e) {
     console.error(e);

@@ -10,6 +10,7 @@ router.get("/dataNatural", data.getDataNatural);
 router.post("/addUser", data.insertUser);
 router.post("/addVariabel", data.insertVariabel);
 router.post("/addCiriVariabel", data.insertCiriVariabel);
+router.post("/addPengujian", data.insertPengujian);
 
 // Method PUT
 

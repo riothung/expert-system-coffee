@@ -117,36 +117,38 @@ const insertCiriVariabel = async (req, res) => {
   }
 };
 
-const insertPengujian = async (req, req) => {
+const insertPengujian = async (req, res) => {
   try {
     const dataPengujian = req.body.form;
+    console.log(dataPengujian, "test baru");
     const insertHasilPengujian = await prisma.hasilPengujian.create({
-      date: new Date(),
-      user: { connect: { id: 1 } },
-      score: dataPengujian.score,
+      data: {
+        date: new Date(),
+        user: { connect: { id: 1 } },
+        score: dataPengujian.score,
+        output: dataPengujian.output,
+      },
     });
-
-    const formattedDate = new Date(newKonsul.date).toISOString().split("T")[0];
-
+    const formattedDate = new Date(insertHasilPengujian.date).toISOString().split("T")[0];
     console.log(dataPengujian);
-
     const keys = Object.keys(dataPengujian);
     if (dataPengujian) {
       for (let i = 0; i < keys.length; i++) {
         const key = keys[i];
         const value = dataPengujian[key];
-
         const pengujianUser = {
           id_ciriVariabel: parseInt(key),
           id_hasilPengujian: insertHasilPengujian.id,
           form: String(value),
         };
-
-        await prisma.pengujian.create({ data: pengujianUser });
+        await prisma.pengujian.create({
+          data: {
+            ...pengujianUser,
+          },
+        });
         console.log(pengujianUser);
       }
     }
-
     return res.status(200).json({
       message: "Data inserted successfully",
       data: {
