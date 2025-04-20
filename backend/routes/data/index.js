@@ -5,6 +5,7 @@ const data = require("../../controllers/data/data.js");
 router.get("/variabel", data.getVariabel);
 router.get("/ciriVariabel", data.getCiriVariabel);
 router.get("/dataNatural", data.getDataNatural);
+router.get("/hasilPengujian", data.getHasilPengujian);
 
 // Method POST
 router.post("/addUser", data.insertUser);

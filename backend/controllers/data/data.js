@@ -136,17 +136,20 @@ const insertPengujian = async (req, res) => {
       for (let i = 0; i < keys.length; i++) {
         const key = keys[i];
         const value = dataPengujian[key];
-        const pengujianUser = {
-          id_ciriVariabel: parseInt(key),
-          id_hasilPengujian: insertHasilPengujian.id,
-          form: String(value),
-        };
-        await prisma.pengujian.create({
-          data: {
-            ...pengujianUser,
-          },
-        });
-        console.log(pengujianUser);
+        console.log(key);
+        if (key !== "score" && key !== "output") {
+          const pengujianUser = {
+            id_ciriVariabel: parseInt(key),
+            id_hasilPengujian: insertHasilPengujian.id,
+            form: parseInt(value),
+          };
+          await prisma.pengujian.create({
+            data: {
+              ...pengujianUser,
+            },
+          });
+          console.log(pengujianUser);
+        }
       }
     }
     return res.status(200).json({
@@ -218,6 +221,38 @@ const getCiriVariabel = async (req, res) => {
   }
 };
 
+// Hasil Pengujian data
+const getHasilPengujian = async (req, res) => {
+  try {
+    const hasilPengujianData = await prisma.hasilPengujian.findMany({
+      include: {
+        user: {
+          select: {
+            username: true,
+          },
+        },
+        pengujian: {
+          include: {
+            ciriVariabel: {
+              include: {
+                variabel: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    return res.status(200).json({
+      data: hasilPengujianData,
+      message: "Data retrieved successfully!",
+    });
+  } catch (e) {
+    console.error(e);
+    return res.status(400).json({ message: e.message });
+  }
+};
+
 // End of GET Method
 
 // PUT Method
@@ -236,4 +271,5 @@ module.exports = {
   getVariabel,
   getCiriVariabel,
   getDataNatural,
+  getHasilPengujian,
 };

@@ -1,17 +1,7 @@
-// const modalWashed = document.getElementById("pengujianWashed");
-// modalWashed.addEventListener("submit", (e) => {
-//   e.preventDefault();
-// });
-
-// const modalHoney = document.getElementById("pengujianHoney");
-// modalHoney.addEventListener("submit", (e) => {
-//   e.preventDefault();
-// });
-
 // Function to handle single checkbox selection within each section
 document.addEventListener("DOMContentLoaded", function () {
   // Find all h5 heading elements which represent section headers
-  const sections = document.querySelectorAll("#pengujianNatural h5");
+  const sections = document.querySelectorAll("form h5");
 
   // Process each section
   sections.forEach((section) => {
@@ -49,7 +39,11 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-const formNatural = async (req, res) => {
+// End of function that handle checkbox
+
+// function that pass the natural's form datas
+
+const formNatural = async () => {
   try {
     const checkboxesValues = document.querySelectorAll("[type=checkbox]");
     let result = {};
@@ -59,9 +53,9 @@ const formNatural = async (req, res) => {
     });
 
     console.log(result);
-    const selectFormValue = document.querySelector(".form-select").value;
+    const selectFormValue = document.querySelector('.form-select[name="37"]').value;
     if (selectFormValue) result[37] = parseInt(selectFormValue);
-    console.log(result[37], "ini form select");
+    console.log(result[37], "ini form select natural");
 
     function calcScore(score = 0) {
       for (let key in result) {
@@ -87,7 +81,7 @@ const formNatural = async (req, res) => {
         result["score"] = totalScore;
         result["output"] = output;
       } else {
-        output += "Output tidak ada";
+        output += "Score tidak memenuhi!";
         result["score"] = totalScore;
         result["output"] = output;
       }
@@ -121,7 +115,7 @@ const formNatural = async (req, res) => {
     if (postResponse.ok) window.location.reload();
   } catch (e) {
     console.error(e);
-    return res.status(400).json({ message: e.message });
+    alert(`Terjadi Kesalahan, Error: ${e.message}`);
   }
 };
 
@@ -135,5 +129,182 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// formNatural();
-// console.log("test");
+// End of Pasca Panen Natural
+
+// function that pass the honey's form datas
+
+const formHoney = async () => {
+  try {
+    const checkboxesValues = document.querySelectorAll("[type=checkbox]");
+    let result = {};
+
+    checkboxesValues.forEach((value) => {
+      if (value.checked) result[value.name] = parseInt(value.value);
+    });
+
+    console.log(result);
+    const selectFormValue = document.querySelector('.form-select[name="38"]').value;
+    if (selectFormValue) result[38] = parseInt(selectFormValue);
+    console.log(result[38], "ini form select honey");
+
+    function calcScore(score = 0) {
+      for (let key in result) {
+        score += parseInt(result[key]);
+      }
+      return score / 10;
+    }
+
+    const totalScore = calcScore();
+    console.log(totalScore, "ini total score");
+
+    function theOutput(output) {
+      if (totalScore >= 65 && totalScore <= 73) {
+        output += "Kurang Memuaskan";
+        result["score"] = totalScore;
+        result["output"] = output;
+      } else if (totalScore >= 74 && totalScore <= 81) {
+        output += "Memuaskan";
+        result["score"] = totalScore;
+        result["output"] = output;
+      } else if (totalScore >= 82 && totalScore <= 88) {
+        output += "Sangat Memuaskan";
+        result["score"] = totalScore;
+        result["output"] = output;
+      } else {
+        output += "Score tidak memenuhi!";
+        result["score"] = totalScore;
+        result["output"] = output;
+      }
+      return output;
+    }
+
+    const finalOutput = theOutput("");
+    console.log(finalOutput, "ini final output");
+
+    console.log(result.score, "ini score");
+
+    // const jsonTest = JSON.stringify(result);
+    // console.log(jsonTest);
+
+    // const postResponse = await fetch("", {
+    const postResponse = await fetch("http://localhost:3000/api/data/addPengujian", {
+      method: "POST",
+      // credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        form: {
+          ...result,
+        },
+      }),
+    });
+
+    // const data = await postResponse.json();
+    // console.log(data, "ini data");
+    if (postResponse.ok) window.location.reload();
+  } catch (e) {
+    console.error(e);
+    alert(`Terjadi Kesalahan, Error: ${e.message}`);
+  }
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  const modalNatural = document.getElementById("pengujianHoney");
+  modalNatural.addEventListener("submit", (e) => {
+    e.preventDefault();
+    formHoney();
+    return false;
+  });
+});
+
+// End of formHoney function
+
+// function that pass the washed's form datas
+
+const formWashed = async () => {
+  try {
+    const checkboxesValues = document.querySelectorAll("[type=checkbox]");
+    let result = {};
+
+    checkboxesValues.forEach((value) => {
+      if (value.checked) result[value.name] = parseInt(value.value);
+    });
+
+    console.log(result);
+    const selectFormValue = document.querySelector('.form-select[name="39"]').value;
+    if (selectFormValue) result[39] = parseInt(selectFormValue);
+    console.log(result[39], "ini form select washed");
+
+    function calcScore(score = 0) {
+      for (let key in result) {
+        score += parseInt(result[key]);
+      }
+      return score / 10;
+    }
+
+    const totalScore = calcScore();
+    console.log(totalScore, "ini total score");
+
+    function theOutput(output) {
+      if (totalScore >= 65 && totalScore <= 73) {
+        output += "Kurang Memuaskan";
+        result["score"] = totalScore;
+        result["output"] = output;
+      } else if (totalScore >= 74 && totalScore <= 81) {
+        output += "Memuaskan";
+        result["score"] = totalScore;
+        result["output"] = output;
+      } else if (totalScore >= 82 && totalScore <= 88) {
+        output += "Sangat Memuaskan";
+        result["score"] = totalScore;
+        result["output"] = output;
+      } else {
+        output += "Score tidak memenuhi!";
+        result["score"] = totalScore;
+        result["output"] = output;
+      }
+      return output;
+    }
+
+    const finalOutput = theOutput("");
+    console.log(finalOutput, "ini final output");
+
+    console.log(result.score, "ini score");
+
+    // const jsonTest = JSON.stringify(result);
+    // console.log(jsonTest);
+
+    // const postResponse = await fetch("", {
+    const postResponse = await fetch("http://localhost:3000/api/data/addPengujian", {
+      method: "POST",
+      // credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        form: {
+          ...result,
+        },
+      }),
+    });
+
+    // const data = await postResponse.json();
+    // console.log(data, "ini data");
+    if (postResponse.ok) window.location.reload();
+  } catch (e) {
+    console.error(e);
+    alert(`Terjadi Kesalahan, Error: ${e.message}`);
+  }
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  const modalNatural = document.getElementById("pengujianWashed");
+  modalNatural.addEventListener("submit", (e) => {
+    e.preventDefault();
+    formWashed();
+    return false;
+  });
+});
+
+// End of formWashed function
