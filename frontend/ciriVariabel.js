@@ -23,7 +23,7 @@ const getVariabelData = async () => {
       modalEdit.style.marginBottom = "5px";
       modalEdit.style.width = "80px";
       modalEdit.setAttribute("data-bs-toggle", "modal");
-      modalEdit.setAttribute("class", "btn btn-primary");
+      modalEdit.setAttribute("class", "btn btn-dark");
       modalEdit.setAttribute("data-bs-target", "#editFaktor");
       modalEdit.setAttribute("data-id", element.id);
       modalEdit.innerHTML = "Edit";

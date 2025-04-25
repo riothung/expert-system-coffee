@@ -16,7 +16,7 @@ const getHasilPengujian = async () => {
       const action = document.createElement("td");
       const modalButton = document.createElement("button");
       modalButton.setAttribute("data-bs-toggle", "modal");
-      modalButton.setAttribute("class", "btn btn-warning");
+      modalButton.setAttribute("class", "btn btn-dark");
       modalButton.setAttribute("data-bs-target", "#detailHasilPengujian");
       modalButton.setAttribute("data-id", element.id);
       modalButton.innerHTML = "Detail";
@@ -52,19 +52,33 @@ const getHasilPengujian = async () => {
         });
 
         tableContent += `</tbody>
-        <tfoot>
-        <tr>
-        <td colspan="2" style="text-align: right;">Total Score:</td>
-        <td>${element.score ?? "Data tidak tersedia"}</td>
-        </tr>
-        </tfoot>
         
         </table>
         <!-- <div class="container" style="display: flex;"> -->
+        <hr style="border-top: 5px solid #481E14; width: 850px; margin: 20px auto;">
         
-        <div class="overall-score" style="font-weight: bold; margin-bottom: 10px; text-align: center;"></div>OVERALL SCORE: ${element.score} </div>
-        <div class="saran-label style="text-align: center; font-weight: bold; margin-bottom: 5px;">SARAN</div>
-        <div class="saran-box" style="border: 1px solid #000; border-radius: 20px; height: 100px; width: 80%; margin: 0 auto;"></div>
+        <div class="container mt-4">
+          <div class="row align-items-center">
+            <!-- OVERALL SCORE di kiri -->
+            <div class="col-md-4 text-center text-md-left">
+              <div class="overall-score font-weight-bold mb-2">
+                OVERALL SCORE: <span id="overall-score" style="color: #F2613F;">${element.score}</span>
+              </div>
+            </div>
+
+            <!-- SARAN di tengah -->
+            <div class="col-md-8 text-center">
+              <div class="saran-label font-weight-bold mb-2">SARAN</div>
+              <div class="saran-box mx-auto p-3" 
+                  style="border: 1px solid #000; border-radius: 20px; height: 100px; width: 80%; overflow-y: auto; max-height: 100px;">
+                <p class="mb-0" style="text-align: justify;">Halo ini adalah saran yang sangat panjang dan akan terus berjalan jika tidak diatur dengan baik, maka kita beri scroll agar tidak keluar dari modal..</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
         <!-- </div> -->
         `;
 

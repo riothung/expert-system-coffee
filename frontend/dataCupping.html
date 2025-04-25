@@ -16,7 +16,6 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="style.css">
   </head>
 
   <body id="page-top">
@@ -84,7 +83,6 @@
             <span>Hasil Pengujian</span>
           </a>
         </li>
-
 
         <!-- Divider -->
         <hr class="sidebar-divider" />
@@ -156,45 +154,52 @@
           </nav>
           <!-- End of Topbar -->
 
-          <h2 class="text-center mb-4">SISTEM PAKAR MENENTUKAN KUALITAS KOPI <br> JENIS ARABIKA PADA SETIAP PASCA PANEN</h2>
+
 
           <div class="container my-5">
-            <div class="row justify-content-center">
-              <div class="col-md-10 col-lg-8">
-                <div class="card shadow-sm border-0 rounded-lg">
-                  <div class="card-body">
-                    <h4 class="text-center font-weight-bold mb-4 text-dark">Sejarah dan Tantangan Kopi Arabika</h4>
-                    <div class="text-center mb-4">
-                      <img src="img/kopi.png" width="250" height="250" class="rounded-circle img-fluid shadow kopi" alt="Kopi">
-                    </div>
-                    <p class="text-justify">
-                      Di antara berbagai jenis kopi, Arabika menorehkan sejarah sebagai kopi pertama yang menjejakkan kakinya di tanah air.
-                      Biji kopi ini berkembang pesat di ketinggian ideal antara 1.000 hingga 1.200 meter di atas permukaan laut.
-                      Semakin tinggi lokasi penanaman, semakin istimewa pula rasa yang dihasilkan dari biji kopi ini.
-                      Namun, di balik keunggulannya, kopi Arabika menyimpan kelemahan.
-                      Biji kopi ini mudah terserang penyakit karat daun yang disebabkan oleh jamur <em>Hemileia vastatrix</em>,
-                      terutama pada ketinggian di bawah 600 hingga 700 meter di atas permukaan laut.
-                      Penyakit ini dapat berakibat fatal, menurunkan hasil panen dan kualitas biji kopi.
-                    </p>
-                   
-                    <p class="text-center font-weight-bold text-dark mt-4 mb-5" style="font-size: 1.1rem;">
-                      Sistem pakar adalah suatu sistem yang berupaya mentransfer pengetahuan manusia ke komputer sehingga komputer tersebut 
-                      dapat memecahkan masalah dengan cara yang biasa dilakukan para pakar.
-                    </p>
+            <h2 class="text-center mb-4 text-dark font-weight-bold">Mengenal Kopi Arabika</h2>
+            <div class="row">
           
-                    <div class="text-center">
-                      <a href="pengujian.html" class="btn btn-dark btn-md px-4 py-2" style="opacity: 0.9; transition: 0.3s;">
-                        Mulai
-                      </a>
-                    </div>
+              <!-- Card 1 -->
+              <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                  <img src="img/natural.jpg" width="500px" height="400px" class="card-img-top rounded-top" alt="Kopi Arabika di Perkebunan">
+                  <div class="card-body text-center">
+                    <h5 class="card-title font-weight-bold">Pasca Panen Natural</h5>
+                    <p class="card-text">Kopi Arabika pertama kali dibudidayakan di dataran tinggi Ethiopia dan menyebar ke berbagai penjuru dunia.</p>
                   </div>
                 </div>
               </div>
+          
+              <!-- Card 2 -->
+              <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                  <img src="img/natural.jpg" width="500px" height="400px" class="card-img-top rounded-top" alt="Biji Kopi Arabika">
+                  <div class="card-body text-center">
+                    <h5 class="card-title font-weight-bold">Pasca Panen Honey</h5>
+                    <p class="card-text">Biji Arabika dikenal dengan rasa yang halus, asam yang cerah, dan aroma yang kompleks serta floral.</p>
+                  </div>
+                </div>
+              </div>
+          
+              <!-- Card 3 -->
+              <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                  <img src="img/natural.jpg" width="500px" height="400px" class="card-img-top rounded-top" alt="Tanaman Kopi Arabika">
+                  <div class="card-body text-center">
+                    <h5 class="card-title font-weight-bold">Pasca Panen Washed</h5>
+                    <p class="card-text">Arabika rentan terhadap penyakit seperti karat daun, dan membutuhkan dataran tinggi untuk tumbuh optimal.</p>
+                  </div>
+                </div>
+              </div>
+          
             </div>
           </div>
           
+        </div>
 
 
+        
         <!-- End of Main Content -->
 
         <!-- Footer -->
@@ -234,39 +239,11 @@
         </div>
       </div>
     </div>
-    
-    <!-- <script>
-      
-      function openChildModal(modalId) {
-        let parentModal = new bootstrap.Modal(document.getElementById('mulaiModal'));
-        console.log(modalId)
-        // let closeParentModal = button.getAttribute('data-bs-dismiss')
-        let childModal = new bootstrap.Modal(document.getElementById(modalId));
-        // parentModal.hide(); // Hide parent modal
-        
-        // Add delay biar parent modal beneran tertutup dulu
-        // if(childModal){
-          //   console.log(closeParentModal)
-          //   console.log("test")  
-          //   closeParentModal
-          //     // closeParentModal
-          //     }  
-          
-          setTimeout(() => {
-             // Show child modal
-            if(childModal.show()){
-              
-            }
-            // console.log("test", childModal)
-          }, 500); // Delay 0.5 detik biar smooth
-          // childModal._config.backdrop = 'static';
-      // childModal._config.keyboard = false;
-    }
-
-    </script> -->
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
@@ -281,6 +258,5 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
