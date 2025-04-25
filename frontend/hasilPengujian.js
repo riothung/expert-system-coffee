@@ -27,31 +27,46 @@ const getHasilPengujian = async () => {
 
         // Buat tabel hanya sekali
         let tableContent = `
-      <table class="table">
-      <thead>
-      <tr>
-      <th>Variabel</th>
-      <th>Ciri Variabel</th>
-      <th>Bobot</th>
-            <th>Total Score</th>
-            <th>Saran</th>
-            </tr>
-            </thead>
-            <tbody>`;
+        <table class="table">
+        <thead>
+        <tr>
+        <th>Variabel</th>
+        <th>Ciri Variabel</th>
+        <th>Bobot</th>
+        <!-- <th>Overall Score</th> -->
+        <!-- <th>Saran</th> -->
+        </tr>
+        </thead>
+        <tbody>`;
 
         // Isi `tbody` dengan data dari `element.jsonData`
         element.pengujian.forEach((pengujian) => {
           tableContent += `
-              <tr>
-              <td style="text-align: justify;">${pengujian.ciriVariabel.variabel.variabel ?? "Data tidak tersedia"}</td>
-              <td style="text-align: justify;">${pengujian.ciriVariabel.ciri ?? "Data tidak tersedia"}</td>
-              <td style="text-align: justify;">${pengujian.ciriVariabel.bobot ?? "Data tidak tersedia"}</td>
-              <td style="text-align: justify;">${element.score ?? "Data tidak tersedia"}</td>
-              <td style="text-align: justify;">Saran</td>
-              </tr>`;
+          <tr>
+          <td style="text-align: justify;">${pengujian.ciriVariabel.variabel.variabel ?? "Data tidak tersedia"}</td>
+          <td style="text-align: justify;">${pengujian.ciriVariabel.ciri ?? "Data tidak tersedia"}</td>
+          <td style="text-align: justify;">${pengujian.form ?? "Data tidak tersedia"}</td>
+          <!-- <td style="text-align: justify;">${element.score ?? "Data tidak tersedia"}</td> -->
+          <!-- <td style="text-align: justify;">Saran</td> -->
+          </tr>`;
         });
 
-        tableContent += `</tbody></table>`;
+        tableContent += `</tbody>
+        <tfoot>
+        <tr>
+        <td colspan="2" style="text-align: right;">Total Score:</td>
+        <td>${element.score ?? "Data tidak tersedia"}</td>
+        </tr>
+        </tfoot>
+        
+        </table>
+        <!-- <div class="container" style="display: flex;"> -->
+        
+        <div class="overall-score" style="font-weight: bold; margin-bottom: 10px; text-align: center;"></div>OVERALL SCORE: ${element.score} </div>
+        <div class="saran-label style="text-align: center; font-weight: bold; margin-bottom: 5px;">SARAN</div>
+        <div class="saran-box" style="border: 1px solid #000; border-radius: 20px; height: 100px; width: 80%; margin: 0 auto;"></div>
+        <!-- </div> -->
+        `;
 
         // Masukkan tabel ke dalam modal-body
         document.querySelector(".modal-body").innerHTML = tableContent;
@@ -61,24 +76,26 @@ const getHasilPengujian = async () => {
       const formattedDate = new Date(element.date).toISOString().split("T")[0];
 
       // Use the formatted date in your table
-
       no.innerHTML = i++;
       date.innerHTML = formattedDate;
       name.innerHTML = element.user.username;
-      element.pengujian.forEach((value) => {
-        console.log(value.ciriVariabel.pasca_panen);
-        if (value.ciriVariabel.pasca_panen === "natural") {
-          jenisPascaPanen.innerHTML = "Natural";
-        } else if (value.ciriVariabel.pasca_panen === "honey") {
-          jenisPascaPanen.innerHTML = "Honey";
-        } else if (value.ciriVariabel.pasca_panen === "washed") {
-          jenisPascaPanen.innerHTML = "Washed";
-        } else {
-          jenisPascaPanen.innerHTML = "Data tidak tersedia";
-        }
-      });
 
-      // jenisPascaPanen.innerHTML = element.pengujian.id_ciriVariabel;
+      // Ambil pasca_panen selain "Umum"
+      const jenisPasca = element.pengujian.find((value) => ["natural", "honey", "washed"].includes(value.ciriVariabel.pasca_panen.toLowerCase()));
+
+      if (jenisPasca) {
+        const pasca = jenisPasca.ciriVariabel.pasca_panen.toLowerCase();
+        if (pasca === "natural") {
+          jenisPascaPanen.innerHTML = "Natural";
+        } else if (pasca === "honey") {
+          jenisPascaPanen.innerHTML = "Honey";
+        } else if (pasca === "washed") {
+          jenisPascaPanen.innerHTML = "Washed";
+        }
+      } else {
+        jenisPascaPanen.innerHTML = "Data tidak tersedia";
+      }
+
       score.innerHTML = element.score;
       output.innerHTML = element.output;
       action.appendChild(modalButton);

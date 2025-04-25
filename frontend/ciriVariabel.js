@@ -27,12 +27,11 @@ const getVariabelData = async () => {
       modalEdit.setAttribute("data-bs-target", "#editFaktor");
       modalEdit.setAttribute("data-id", element.id);
       modalEdit.innerHTML = "Edit";
-
       no.innerText = i++;
       kode.innerText = element.kode;
       ciriVariabel.innerText = element.ciri;
       jenisPascaPanen.innerText = element.pasca_panen;
-      bobot.innerText = element.bobot;
+      bobot.innerText = element.bobot === 0 ? "60-90" : element.bobot;
       action.appendChild(modalEdit);
       action.appendChild(deleteButton);
       tableRow.appendChild(no);
