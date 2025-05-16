@@ -1,5 +1,7 @@
 // Function to handle single checkbox selection within each section
 document.addEventListener("DOMContentLoaded", function () {
+  // const allCheckBoxes = document.querySelectorAll('input[type="checkbox"]');
+  // allCheckBoxes.
   // Find all h5 heading elements which represent section headers
   const sections = document.querySelectorAll("form h5");
 
@@ -112,7 +114,7 @@ const formNatural = async () => {
 
     // const data = await postResponse.json();
     // console.log(data, "ini data");
-    if (postResponse.ok) window.location.reload();
+    if (postResponse.ok) window.location.href = "/hasilPengujian.html";
   } catch (e) {
     console.error(e);
     alert(`Terjadi Kesalahan, Error: ${e.message}`);
@@ -123,9 +125,32 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalNatural = document.getElementById("pengujianNatural");
   modalNatural.addEventListener("submit", (e) => {
     e.preventDefault();
+
+    const sections = document.querySelectorAll("form h5");
+    let isValid = true;
+
+    sections.forEach((section) => {
+      let currentElement = section.nextElementSibling;
+      let foundChecked = false;
+
+      while (currentElement && currentElement.tagName !== "H5") {
+        const checkboxes = currentElement.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach((checkbox) => {
+          if (checkbox.checked) foundChecked = true;
+        });
+        currentElement = currentElement.nextElementSibling;
+      }
+
+      if (!foundChecked) {
+        isValid = false;
+        alert(`Bagian "${section.textContent}" wajib diisi!`);
+      }
+    });
+
+    if (!isValid) return;
+
+    // Semua bagian valid, lanjutkan
     formNatural();
-    // console.log("halo natural");
-    return false;
   });
 });
 
@@ -210,11 +235,36 @@ const formHoney = async () => {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  const modalNatural = document.getElementById("pengujianHoney");
+  const modalNatural = document.getElementById("pengujianNatural");
   modalNatural.addEventListener("submit", (e) => {
     e.preventDefault();
-    formHoney();
-    return false;
+
+    // Validasi: pastikan setiap bagian (antara <h5> dan <h5> berikutnya) memiliki satu checkbox yang dicentang
+    const sections = modalNatural.querySelectorAll("h5");
+    let isValid = true;
+
+    for (let section of sections) {
+      let foundChecked = false;
+      let current = section.nextElementSibling;
+
+      while (current && current.tagName !== "H5") {
+        const checkboxes = current.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach((cb) => {
+          if (cb.checked) foundChecked = true;
+        });
+        current = current.nextElementSibling;
+      }
+
+      if (!foundChecked) {
+        alert(`Bagian "${section.textContent.trim()}" wajib dipilih salah satu.`);
+        isValid = false;
+        break;
+      }
+    }
+
+    if (isValid) {
+      formNatural();
+    }
   });
 });
 
@@ -302,8 +352,31 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalNatural = document.getElementById("pengujianWashed");
   modalNatural.addEventListener("submit", (e) => {
     e.preventDefault();
+
+    const sections = document.querySelectorAll("form h5");
+    let isValid = true;
+
+    sections.forEach((section) => {
+      let currentElement = section.nextElementSibling;
+      let foundChecked = false;
+
+      while (currentElement && currentElement.tagName !== "H5") {
+        const checkboxes = currentElement.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach((checkbox) => {
+          if (checkbox.checked) foundChecked = true;
+        });
+        currentElement = currentElement.nextElementSibling;
+      }
+
+      if (!foundChecked) {
+        isValid = false;
+        alert(`Bagian "${section.textContent}" wajib diisi!`);
+      }
+    });
+
+    if (!isValid) return;
+
     formWashed();
-    return false;
   });
 });
 

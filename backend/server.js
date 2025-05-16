@@ -9,6 +9,8 @@ const router = require("./routes/index");
 
 const app = express();
 
+// app.use = express.static()
+
 const PORT = 3000;
 
 dotenv.config();

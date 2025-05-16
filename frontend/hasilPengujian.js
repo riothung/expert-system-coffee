@@ -63,15 +63,29 @@ const getHasilPengujian = async () => {
             <div class="col-md-4 text-center text-md-left">
               <div class="overall-score font-weight-bold mb-2">
                 OVERALL SCORE: <span id="overall-score" style="color: #F2613F;">${element.score}</span>
-              </div>
-            </div>
-
-            <!-- SARAN di tengah -->
-            <div class="col-md-8 text-center">
-              <div class="saran-label font-weight-bold mb-2">SARAN</div>
-              <div class="saran-box mx-auto p-3" 
+                </div>
+                <div class="saran-label font-weight-bold mb-2">Kategori: ${
+                  element.output === "Sangat Memuaskan" ? "Sangat Memuaskan" : element.output === "Memuaskan" ? "Memuaskan" : element.output === "Kurang Memuaskan" ? "Kurang Memuaskan" : "Score tidak memenuhi"
+                }</div>
+                </div>
+                
+                <!-- SARAN di tengah -->
+                <div class="col-md-8 text-center">
+                <div class="saran-label font-weight-bold mb-2">Feedback</div>
+              <div class="saran-box mx-auto p-3"
                   style="border: 1px solid #000; border-radius: 20px; height: 100px; width: 80%; overflow-y: auto; max-height: 100px;">
-                <p class="mb-0" style="text-align: justify;">Halo ini adalah saran yang sangat panjang dan akan terus berjalan jika tidak diatur dengan baik, maka kita beri scroll agar tidak keluar dari modal..</p>
+                  ${
+                    element.output === "Kurang memuaskan"
+                      ? "1.Penting untuk menjaga konsistensi selama proses evaluasi agar hasil lebih mendekati referensi pakar. 2. Lakukan evaluasi menyeluruh terhadap pelaksanaan sistem guna meningkatkan akurasi hasil"
+                      : element.output === "Memuaskan"
+                      ? "Kinerja penilaian menunjukkan hasil yang baik. Pertahankan konsistensi evaluasi agar tetap selaras dengan referensi pakar."
+                      : element.output === "Sangat Memuaskan"
+                      ? "Hasil yang sangat memuaskan! Pertahankan kualitas dan konsistensi yang telah dicapai!"
+                      : element.output === "Score tidak memenuhi!"
+                      ? "Score tidak memenuhi, tidak ada saran"
+                      : "Kualitas kopi sudah baik"
+                  }
+                <p class="mb-0" style="text-align: justify;"></p>
               </div>
             </div>
           </div>

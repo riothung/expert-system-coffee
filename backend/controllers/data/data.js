@@ -117,6 +117,31 @@ const insertCiriVariabel = async (req, res) => {
   }
 };
 
+const insertCiriVariabelReal = async (req, res) => {
+  try {
+    const { kode, ciri, id_variabel, pasca_panen, bobot } = req.body;
+
+    const insertData = await prisma.ciriVariabel.create({
+      data: {
+        kode: kode,
+        ciri: ciri,
+        id_variabel: parseInt(id_variabel),
+        pasca_panen: pasca_panen,
+        bobot: parseInt(bobot),
+      },
+    });
+
+    if (insertData)
+      return res.json({
+        data: insertData,
+        message: "Data inserted successfully",
+      });
+  } catch (e) {
+    console.error(e);
+    return res.status(400).json({ message: e.message });
+  }
+};
+
 const insertPengujian = async (req, res) => {
   try {
     const dataPengujian = req.body.form;
@@ -152,13 +177,16 @@ const insertPengujian = async (req, res) => {
         }
       }
     }
-    return res.status(200).json({
-      message: "Data inserted successfully",
-      data: {
-        ...insertHasilPengujian,
-        date: formattedDate,
-      },
-    });
+    return res
+      .status(200)
+      .json({
+        message: "Data inserted successfully",
+        data: {
+          ...insertHasilPengujian,
+          date: formattedDate,
+        },
+      })
+      .redirect("/hasilPengujian.html");
   } catch (e) {
     console.error(e);
     return res.status(400).json({ message: e.message });
@@ -260,6 +288,21 @@ const getHasilPengujian = async (req, res) => {
 // End of PUT Method
 
 // DELETE Method
+const deleteCiriVariabel = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const deleteData = await prisma.ciriVariabel.delete({
+      where: {
+        id: parseInt(id),
+      },
+    });
+    if (deleteData) return res.status(200).json({ message: "Data deleted successfully" });
+  } catch (e) {
+    console.error(e);
+    return res.status(400).json({ message: e.message });
+  }
+};
 
 // End of DELETE Method
 
@@ -267,9 +310,11 @@ module.exports = {
   insertUser,
   insertVariabel,
   insertCiriVariabel,
+  insertCiriVariabelReal,
   insertPengujian,
   getVariabel,
   getCiriVariabel,
   getDataNatural,
   getHasilPengujian,
+  deleteCiriVariabel,
 };

@@ -159,6 +159,9 @@
             <h1 class="mt-4">Ciri Variabel Cupping</h1>
             <div class="card-body">
             <table class="table">
+              <button type="button" class="btn btn-dark mb-3" data-bs-toggle="modal" data-bs-target="#tambahCiri">
+            Tambah Data
+            </button>
             <thead>
               <tr>
                 <th scope="col">No</th>
@@ -176,6 +179,54 @@
         </main>
         </div>
         <!-- End of Main Content -->
+
+  <div class="modal fade" id="tambahCiri" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data Ciri Variabel</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div style="margin-left: 10px; margin-right: 10px;">
+        <form id="ciriVariabelForm">
+        <div class="mb-3">
+          <label class="form-label">Kode</label>
+          <input type="text" name="kode" id="kodeCiriVariabel" class="form-control" required>
+      </div>
+        <div class="mb-3">
+          <label class="form-label">Ciri Variabel</label>
+          <input type="text" id="ciriVariabelText" name="ciri" class="form-control" required>
+      </div>
+        <div class="mb-3">
+              <label for="variabelData" class="form-label">Variabel</label>
+              <select name="id_variabel" class="form-control" id="variabel" class="idVariabel" required> 
+                  <option value="" disabled selected hidden>Pilih Variabel</option>
+              </select>
+          </div>
+        <div class="mb-3">
+              <label for="jenisPascaPanen" class="form-label">Jenis Pasca Panen</label>
+              <select name="pasca_panen" class="form-control" id="idJenis" class="addOption" required> 
+                  <option value="" disabled selected hidden>Pilih Jenis Pasca Panen</option>
+                  <option value="umum">Umum</option>
+                  <option value="natural">Natural</option>
+                  <option value="honey">Honey</option>
+                  <option value="washed">Washed</option>
+              </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Bobot</label>
+            <input type="number" name="bobot" id="ciriVariabelBobot" class="form-control" required>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end of modal -->
 
         <!-- Footer -->
         <footer class="sticky-footer bg-white">

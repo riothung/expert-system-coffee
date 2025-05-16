@@ -50,9 +50,11 @@ const login = async (req, res) => {
       if (user.isAdmin == true) {
         const token = jwt.sign({ userId: user.id, isAdmin: true }, process.env.TOKEN_SECRET, { expiresIn: "1 day" });
         res.cookie("token", token, { httpOnly: true, sameSite: "None", secure: true }).status(200).json({ message: "Login Success" });
+        // .redirect("../../../frontend/index.html");
       } else {
         const token = jwt.sign({ userId: user.id, isAdmin: false }, process.env.TOKEN_SECRET, { expiresIn: "1 day" });
         res.cookie("token", token, { httpOnly: true, sameSite: "None", secure: true }).status(200).json({ message: "Login Success" });
+        // .redirect("../../../frontend/index.html");
       }
     }
   } catch (error) {
@@ -62,12 +64,12 @@ const login = async (req, res) => {
 };
 
 const logout = async (req, res) => {
-  res.clearCookie("token")
-  res.status(200).json({ message: "Logout Success!" })
-}
+  res.clearCookie("token");
+  res.status(200).json({ message: "Logout Success!" });
+};
 
 module.exports = {
   register,
   login,
-  logout
-}
+  logout,
+};
