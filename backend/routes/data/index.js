@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const data = require("../../controllers/data/data.js");
+const { verifyToken, isAdmin } = require("../../middleware/authMiddleware.js");
 
 // Method GET
 router.get("/variabel", data.getVariabel);
@@ -22,6 +23,7 @@ router.post("/addCiriVariabelReal", data.insertCiriVariabelReal);
 
 // Method DELETE
 router.delete("/deleteCiriVariabel/:id", data.deleteCiriVariabel);
+router.delete("/deleteHasilPengujian/:id", data.deleteHasilPengujian);
 //
 
 module.exports = {

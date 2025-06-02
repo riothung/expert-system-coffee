@@ -14,6 +14,27 @@ const getHasilPengujian = async () => {
       const score = document.createElement("td");
       const output = document.createElement("td");
       const action = document.createElement("td");
+      const deleteButton = document.createElement("button");
+      deleteButton.setAttribute("class", "btn btn-danger");
+      deleteButton.setAttribute("data-id", element.id);
+      deleteButton.style.width = "80px";
+      deleteButton.style.marginLeft = "10px";
+      deleteButton.innerHTML = "Delete";
+      // Delete hasil pengujian data event listener
+      deleteButton.addEventListener("click", async () => {
+        const confirmed = window.confirm("Anda yakin ingin menghapus data ini?");
+        if (!confirmed) return; // Jika user klik "Batal", hentikan proses
+
+        try {
+          const idToDelete = deleteButton.getAttribute("data-id");
+          const deleteData = await fetch(`http://localhost:3000/api/data/deleteHasilPengujian/${idToDelete}`, {
+            method: "DELETE",
+          });
+          if (deleteData.ok) window.location.reload();
+        } catch (e) {
+          console.error(e);
+        }
+      });
       const modalButton = document.createElement("button");
       modalButton.setAttribute("data-bs-toggle", "modal");
       modalButton.setAttribute("class", "btn btn-dark");
@@ -127,6 +148,7 @@ const getHasilPengujian = async () => {
       score.innerHTML = element.score;
       output.innerHTML = element.output;
       action.appendChild(modalButton);
+      action.appendChild(deleteButton);
       tableRow.appendChild(no);
       tableRow.appendChild(date);
       tableRow.appendChild(name);

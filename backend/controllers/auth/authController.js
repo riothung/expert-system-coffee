@@ -47,15 +47,23 @@ const login = async (req, res) => {
       const comparePassword = await bcrypt.compare(password, user.password);
       if (!comparePassword) return res.status(401).json({ message: "Wrong password!" });
 
-      if (user.isAdmin == true) {
-        const token = jwt.sign({ userId: user.id, isAdmin: true }, process.env.TOKEN_SECRET, { expiresIn: "1 day" });
-        res.cookie("token", token, { httpOnly: true, sameSite: "None", secure: true }).status(200).json({ message: "Login Success" });
-        // .redirect("../../../frontend/index.html");
-      } else {
-        const token = jwt.sign({ userId: user.id, isAdmin: false }, process.env.TOKEN_SECRET, { expiresIn: "1 day" });
-        res.cookie("token", token, { httpOnly: true, sameSite: "None", secure: true }).status(200).json({ message: "Login Success" });
-        // .redirect("../../../frontend/index.html");
-      }
+      // if (user.isAdmin == true) {
+      //   const token = jwt.sign({ userId: user.id, isAdmin: true }, process.env.TOKEN_SECRET, { expiresIn: "1 day" });
+      //   res.cookie("token", token, { httpOnly: true, sameSite: "None", secure: true }).status(200).json({ message: "Login Success" });
+      //   // .redirect("../../../frontend/index.html");
+      // } else {
+      //   const token = jwt.sign({ userId: user.id, isAdmin: false }, process.env.TOKEN_SECRET, { expiresIn: "1 day" });
+      //   res.cookie("token", token, { httpOnly: true, sameSite: "None", secure: true }).status(200).json({ message: "Login Success" });
+      //   // .redirect("../../../frontend/index.html");
+      // }
+
+      const tokenPayload = {
+        userId: user.id,
+        isAdmin: user.isAdmin, // langsung boolean true/false
+      };
+      const token = jwt.sign(tokenPayload, process.env.TOKEN_SECRET, { expiresIn: "1 day" });
+
+      res.cookie("token", token, { httpOnly: true, sameSite: "Lax", secure: false }).status(200).json({ message: "Login Success" });
     }
   } catch (error) {
     console.error(error);

@@ -22,6 +22,9 @@ const getVariabelData = async () => {
       deleteButton.innerHTML = "Delete";
       // Delete ciri variabel data event listener
       deleteButton.addEventListener("click", async () => {
+        const confirmed = window.confirm("Anda yakin ingin menghapus data ini?");
+        if (!confirmed) return; // Jika user klik "Batal", hentikan proses
+
         try {
           const idToDelete = deleteButton.getAttribute("data-id");
           const deleteData = await fetch(`http://localhost:3000/api/data/deleteCiriVariabel/${idToDelete}`, {
@@ -45,7 +48,50 @@ const getVariabelData = async () => {
       modalEdit.innerHTML = "Edit";
       // Edit Ciri Variabel data event listener
       modalEdit.addEventListener("click", async () => {
-        document.getElementById("editId").value = modalEdit.getAttribute("data-id");
+        getVariabel();
+        document.getElementById("exampleModalLabel").innerText = `Edit Ciri Variabel #${element.id}`;
+        editedCiriVariabelId = element.id;
+
+        let editContent = `
+      <div style="margin-left: 10px; margin-right: 10px;">
+        <form id="ciriVariabelForm">
+        <div class="mb-3">
+          <label class="form-label">Kode</label>
+          <input type="text" name="kode" id="kodeCiriVariabel" class="form-control" value="${element.kode}" required>
+      </div>
+        <div class="mb-3">
+          <label class="form-label">Ciri Variabel</label>
+          <input type="text" id="ciriVariabelText" name="ciri" class="form-control" value="${element.ciri}" required>
+      </div>
+        <div class="mb-3">
+              <label for="variabelData" class="form-label">Variabel</label>
+              <select name="id_variabel" class="form-control" id="variabel" class="idVariabel" required> 
+                  <option value="" disabled selected hidden>Pilih Variabel</option>
+              </select>
+          </div>
+        <div class="mb-3">
+              <label for="jenisPascaPanen" class="form-label">Jenis Pasca Panen</label>
+              <select name="pasca_panen" class="form-control" id="idJenis" class="addOption" required> 
+                  <option value="" disabled selected hidden>Pilih Jenis Pasca Panen</option>
+                  <option value="umum">Umum</option>
+                  <option value="natural">Natural</option>
+                  <option value="honey">Honey</option>
+                  <option value="washed">Washed</option>
+              </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Bobot</label>
+            <input type="number" name="bobot" id="ciriVariabelBobot" class="form-control" required>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        </form>
+      </div>
+      `;
+
+        document.querySelector(".modal-body").innerHTML = editContent;
       });
 
       no.innerText = i++;

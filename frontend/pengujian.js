@@ -114,7 +114,7 @@ const formNatural = async () => {
 
     // const data = await postResponse.json();
     // console.log(data, "ini data");
-    if (postResponse.ok) window.location.href = "/hasilPengujian.html";
+    if (postResponse.ok) return (window.location.href = "./hasilPengujian.html");
   } catch (e) {
     console.error(e);
     alert(`Terjadi Kesalahan, Error: ${e.message}`);
@@ -126,31 +126,43 @@ document.addEventListener("DOMContentLoaded", () => {
   modalNatural.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const sections = document.querySelectorAll("form h5");
+    const sections = modalNatural.querySelectorAll("h5");
     let isValid = true;
 
-    sections.forEach((section) => {
-      let currentElement = section.nextElementSibling;
+    for (let section of sections) {
+      const sectionTitle = section.textContent.trim();
       let foundChecked = false;
+      let current = section.nextElementSibling;
 
-      while (currentElement && currentElement.tagName !== "H5") {
-        const checkboxes = currentElement.querySelectorAll('input[type="checkbox"]');
-        checkboxes.forEach((checkbox) => {
-          if (checkbox.checked) foundChecked = true;
+      // Loop sampai h5 berikutnya
+      while (current && current.tagName !== "H5") {
+        // Cek checkbox
+        const checkboxes = current.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach((cb) => {
+          if (cb.checked) foundChecked = true;
         });
-        currentElement = currentElement.nextElementSibling;
+
+        // Jika bagian ini adalah Natural Acid, cek juga select
+        if (sectionTitle.includes("Natural Acid")) {
+          const selects = current.querySelectorAll("select");
+          selects.forEach((select) => {
+            if (select.value && select.value !== "") foundChecked = true;
+          });
+        }
+
+        current = current.nextElementSibling;
       }
 
       if (!foundChecked) {
+        alert(`Bagian "${sectionTitle}" wajib dipilih salah satu.`);
         isValid = false;
-        alert(`Bagian "${section.textContent}" wajib diisi!`);
+        break; // stop looping jika satu saja tidak valid
       }
-    });
+    }
 
-    if (!isValid) return;
-
-    // Semua bagian valid, lanjutkan
-    formNatural();
+    if (isValid) {
+      formNatural();
+    }
   });
 });
 
@@ -208,8 +220,8 @@ const formHoney = async () => {
 
     console.log(result.score, "ini score");
 
-    // const jsonTest = JSON.stringify(result);
-    // console.log(jsonTest);
+    const jsonTest = JSON.stringify(result);
+    console.log(jsonTest);
 
     // const postResponse = await fetch("", {
     const postResponse = await fetch("http://localhost:3000/api/data/addPengujian", {
@@ -225,8 +237,8 @@ const formHoney = async () => {
       }),
     });
 
-    // const data = await postResponse.json();
-    // console.log(data, "ini data");
+    const data = await postResponse.json();
+    console.log(data, "ini data");
     if (postResponse.ok) window.location.reload();
   } catch (e) {
     console.error(e);
@@ -235,35 +247,46 @@ const formHoney = async () => {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  const modalNatural = document.getElementById("pengujianNatural");
-  modalNatural.addEventListener("submit", (e) => {
+  const modalHoney = document.getElementById("pengujianHoney");
+  modalHoney.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    // Validasi: pastikan setiap bagian (antara <h5> dan <h5> berikutnya) memiliki satu checkbox yang dicentang
-    const sections = modalNatural.querySelectorAll("h5");
+    const sections = modalHoney.querySelectorAll("h5");
     let isValid = true;
 
     for (let section of sections) {
+      const sectionTitle = section.textContent.trim();
       let foundChecked = false;
       let current = section.nextElementSibling;
 
+      // Loop sampai h5 berikutnya
       while (current && current.tagName !== "H5") {
+        // Cek checkbox
         const checkboxes = current.querySelectorAll('input[type="checkbox"]');
         checkboxes.forEach((cb) => {
           if (cb.checked) foundChecked = true;
         });
+
+        // Jika bagian ini adalah Honey Acid, cek juga select
+        if (sectionTitle.includes("Honey Acid")) {
+          const selects = current.querySelectorAll("select");
+          selects.forEach((select) => {
+            if (select.value && select.value !== "") foundChecked = true;
+          });
+        }
+
         current = current.nextElementSibling;
       }
 
       if (!foundChecked) {
-        alert(`Bagian "${section.textContent.trim()}" wajib dipilih salah satu.`);
+        alert(`Bagian "${sectionTitle}" wajib dipilih salah satu.`);
         isValid = false;
-        break;
+        break; // stop looping jika satu saja tidak valid
       }
     }
 
     if (isValid) {
-      formNatural();
+      formHoney(); // lanjut submit form
     }
   });
 });
@@ -309,6 +332,7 @@ const formWashed = async () => {
         output += "Sangat Memuaskan";
         result["score"] = totalScore;
         result["output"] = output;
+        1;
       } else {
         output += "Score tidak memenuhi!";
         result["score"] = totalScore;
@@ -349,34 +373,47 @@ const formWashed = async () => {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  const modalNatural = document.getElementById("pengujianWashed");
-  modalNatural.addEventListener("submit", (e) => {
+  const modalWashed = document.getElementById("pengujianWashed");
+  modalWashed.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const sections = document.querySelectorAll("form h5");
+    const sections = modalWashed.querySelectorAll("h5");
     let isValid = true;
 
-    sections.forEach((section) => {
-      let currentElement = section.nextElementSibling;
+    for (let section of sections) {
+      const sectionTitle = section.textContent.trim();
       let foundChecked = false;
+      let current = section.nextElementSibling;
 
-      while (currentElement && currentElement.tagName !== "H5") {
-        const checkboxes = currentElement.querySelectorAll('input[type="checkbox"]');
-        checkboxes.forEach((checkbox) => {
-          if (checkbox.checked) foundChecked = true;
+      // Loop sampai h5 berikutnya
+      while (current && current.tagName !== "H5") {
+        // Cek checkbox
+        const checkboxes = current.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach((cb) => {
+          if (cb.checked) foundChecked = true;
         });
-        currentElement = currentElement.nextElementSibling;
+
+        // Jika bagian ini adalah Washed Acid, cek juga select
+        if (sectionTitle.includes("Washed Acid")) {
+          const selects = current.querySelectorAll("select");
+          selects.forEach((select) => {
+            if (select.value && select.value !== "") foundChecked = true;
+          });
+        }
+
+        current = current.nextElementSibling;
       }
 
       if (!foundChecked) {
+        alert(`Bagian "${sectionTitle}" wajib dipilih salah satu.`);
         isValid = false;
-        alert(`Bagian "${section.textContent}" wajib diisi!`);
+        break; // stop looping jika satu saja tidak valid
       }
-    });
+    }
 
-    if (!isValid) return;
-
-    formWashed();
+    if (isValid) {
+      formWashed();
+    }
   });
 });
 
