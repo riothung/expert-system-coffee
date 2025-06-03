@@ -281,6 +281,40 @@ const getHasilPengujian = async (req, res) => {
   }
 };
 
+// const getHasilPengujian = async (req, res) => {
+//   try {
+//     const { isAdmin, userId } = req.user; // Ini didapat dari middleware verifyToken
+
+//     const hasilPengujianData = await prisma.hasilPengujian.findMany({
+//       where: isAdmin ? {} : { userId: userId },
+//       include: {
+//         user: {
+//           select: {
+//             username: true,
+//           },
+//         },
+//         pengujian: {
+//           include: {
+//             ciriVariabel: {
+//               include: {
+//                 variabel: true,
+//               },
+//             },
+//           },
+//         },
+//       },
+//     });
+
+//     return res.status(200).json({
+//       data: hasilPengujianData,
+//       message: "Data retrieved successfully!",
+//     });
+//   } catch (e) {
+//     console.error(e);
+//     return res.status(400).json({ message: e.message });
+//   }
+// };
+
 // End of GET Method
 
 // PUT Method
@@ -304,6 +338,29 @@ const deleteCiriVariabel = async (req, res) => {
   }
 };
 
+const deleteHasilPengujian = async (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+
+    // Hapus data di Pengujian
+    await prisma.pengujian.deleteMany({
+      where: {
+        id_hasilPengujian: id,
+      },
+    });
+
+    // Hapus data HasilPengujian
+    const deleteData = await prisma.hasilPengujian.delete({
+      where: { id },
+    });
+
+    if (deleteData) return res.status(200).json({ message: "Data deleted successfully" });
+  } catch (e) {
+    console.error(e);
+    return res.status(400).json({ message: e.message });
+  }
+};
+
 // End of DELETE Method
 
 module.exports = {
@@ -317,4 +374,5 @@ module.exports = {
   getDataNatural,
   getHasilPengujian,
   deleteCiriVariabel,
+  deleteHasilPengujian,
 };
