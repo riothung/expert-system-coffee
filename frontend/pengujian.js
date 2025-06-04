@@ -239,7 +239,7 @@ const formHoney = async () => {
 
     const data = await postResponse.json();
     console.log(data, "ini data");
-    if (postResponse.ok) window.location.reload();
+    if (postResponse.ok) return (window.location.href = "./hasilPengujian.html");
   } catch (e) {
     console.error(e);
     alert(`Terjadi Kesalahan, Error: ${e.message}`);
@@ -365,7 +365,7 @@ const formWashed = async () => {
 
     // const data = await postResponse.json();
     // console.log(data, "ini data");
-    if (postResponse.ok) window.location.reload();
+    if (postResponse.ok) return (window.location.href = "./hasilPengujian.html");
   } catch (e) {
     console.error(e);
     alert(`Terjadi Kesalahan, Error: ${e.message}`);

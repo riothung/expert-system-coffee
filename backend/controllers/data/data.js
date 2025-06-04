@@ -145,7 +145,7 @@ const insertCiriVariabelReal = async (req, res) => {
 const insertPengujian = async (req, res) => {
   try {
     const dataPengujian = req.body.form;
-    console.log(dataPengujian, "test baru");
+    // console.log(dataPengujian, "test baru");
     const insertHasilPengujian = await prisma.hasilPengujian.create({
       data: {
         date: new Date(),
@@ -155,7 +155,7 @@ const insertPengujian = async (req, res) => {
       },
     });
     const formattedDate = new Date(insertHasilPengujian.date).toISOString().split("T")[0];
-    console.log(dataPengujian);
+    // console.log(dataPengujian);
     const keys = Object.keys(dataPengujian);
     if (dataPengujian) {
       for (let i = 0; i < keys.length; i++) {
@@ -168,25 +168,23 @@ const insertPengujian = async (req, res) => {
             id_hasilPengujian: insertHasilPengujian.id,
             form: parseInt(value),
           };
-          await prisma.pengujian.create({
+          var insertPengujian = await prisma.pengujian.create({
             data: {
               ...pengujianUser,
             },
           });
-          console.log(pengujianUser);
+          // console.log(pengujianUser);
         }
       }
     }
-    return res
-      .status(200)
-      .json({
-        message: "Data inserted successfully",
-        data: {
-          ...insertHasilPengujian,
-          date: formattedDate,
-        },
-      })
-      .redirect("/hasilPengujian.html");
+    // if (insertPengujian) window.location.href = "./hasilPengujian.html";
+    return res.status(200).json({
+      message: "Data inserted successfully",
+      data: {
+        ...insertHasilPengujian,
+        date: formattedDate,
+      },
+    });
   } catch (e) {
     console.error(e);
     return res.status(400).json({ message: e.message });
