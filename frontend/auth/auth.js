@@ -29,7 +29,8 @@ const responseLogin = async () => {
 };
 
 const logoutButton = document.getElementById("logoutButton");
-logoutButton.addEventListener("click", async () => {
+logoutButton.addEventListener("click", async (e) => {
+  e.preventDefault();
   try {
     const response = await fetch("http://localhost:3000/api/auth/logout", {
       method: "POST",

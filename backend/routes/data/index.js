@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const data = require("../../controllers/data/data.js");
-const { verifyToken, isAdmin } = require("../../middleware/authMiddleware.js");
+// const { verifyToken, isAdmin } = require("../../middleware/authMiddleware.js");
 
 // Method GET
 router.get("/variabel", data.getVariabel);

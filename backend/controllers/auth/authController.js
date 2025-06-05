@@ -36,10 +36,10 @@ const register = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  const { email, password } = req.body;
-  if (!email || !password) return res.status(400).json({ message: "Email or Password are required!" });
-
   try {
+    const { email, password } = req.body;
+    if (!email || !password) return res.status(400).json({ message: "Email or Password are required!" });
+
     if (email && password) {
       const user = await prisma.user.findUnique({ where: { email: req.body.email } });
       if (!user) return res.status(400).json({ message: "User Doesn't exist!" });
@@ -63,7 +63,7 @@ const login = async (req, res) => {
       };
       const token = jwt.sign(tokenPayload, process.env.TOKEN_SECRET, { expiresIn: "1 day" });
 
-      res.cookie("token", token, { httpOnly: true, sameSite: "Lax", secure: false }).status(200).json({ message: "Login Success" });
+      return res.cookie("token", token, { httpOnly: true, sameSite: "None", secure: true }).status(200).json({ message: "Login Success" });
     }
   } catch (error) {
     console.error(error);
@@ -71,7 +71,7 @@ const login = async (req, res) => {
   }
 };
 
-const logout = async (req, res) => {
+const logout = (req, res) => {
   res.clearCookie("token");
   res.status(200).json({ message: "Logout Success!" });
 };

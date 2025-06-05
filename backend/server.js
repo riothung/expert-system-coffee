@@ -4,12 +4,11 @@ const dotenv = require("dotenv");
 const helmet = require("helmet");
 const compression = require("compression");
 const cookieParser = require("cookie-parser");
+const path = require("path");
 
 const router = require("./routes/index");
 
 const app = express();
-
-// app.use = express.static()
 
 const PORT = 3000;
 
@@ -22,9 +21,11 @@ app.use(
   cors({
     credentials: true,
     origin: "*",
-    // origin: "http://127.0.0.1:5500",
+    // origin: ["http://localhost:3000", "http://127.0.0.1:5500"],
   })
 );
+
+app.use(express.static(path.join(__dirname, "../frontend")));
 
 app.use(
   express.json({

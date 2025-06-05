@@ -168,7 +168,7 @@ const insertPengujian = async (req, res) => {
             id_hasilPengujian: insertHasilPengujian.id,
             form: parseInt(value),
           };
-          var insertPengujian = await prisma.pengujian.create({
+          await prisma.pengujian.create({
             data: {
               ...pengujianUser,
             },
@@ -177,7 +177,6 @@ const insertPengujian = async (req, res) => {
         }
       }
     }
-    // if (insertPengujian) window.location.href = "./hasilPengujian.html";
     return res.status(200).json({
       message: "Data inserted successfully",
       data: {
