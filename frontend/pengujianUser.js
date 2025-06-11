@@ -300,6 +300,8 @@ const formWashed = async () => {
     const checkboxesValues = document.querySelectorAll("[type=checkbox]");
     let result = {};
 
+    if (getUsersName) result["pengguna"] = getUsersName;
+
     checkboxesValues.forEach((value) => {
       if (value.checked) result[value.name] = parseInt(value.value);
     });
@@ -419,10 +421,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // End of formWashed function
 
+let getUsersName = "";
+
 function showSlider(event) {
   event.preventDefault(); // stop form submit
 
   const name = document.getElementById("nameInput").value;
+  getUsersName = name;
+
   if (name.trim() !== "") {
     // sembunyikan form
     document.getElementById("nameForm").classList.add("d-none");
@@ -430,14 +436,20 @@ function showSlider(event) {
     // tampilkan slider
     document.getElementById("sliderContainer").classList.remove("d-none");
   }
+
+  console.log(getUsersName);
 }
 
-const nameForm = document.getElementById("nameForm");
-// console.log(nameForm);
-nameForm.addEventListener("submit", (e) => {
-  e.preventDefault();
+// const nameForm = document.getElementById("nameForm");
+// // console.log(nameForm);
+// nameForm.addEventListener("submit", (e) => {
+//   e.preventDefault();
 
-  const getName = document.getElementById("nameInput").value;
-  var name = "";
-  name += getName;
-});
+//   function getUserName() {
+//     const getName = document.getElementById("nameInput").value;
+//     let name = "";
+//     name += getName;
+//     console.log(name);
+//   }
+//   getUserName();
+// });
