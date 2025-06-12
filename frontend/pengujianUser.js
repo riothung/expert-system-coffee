@@ -303,76 +303,62 @@ const formWashed = async () => {
     if (getUsersName) result["pengguna"] = getUsersName;
 
     checkboxesValues.forEach((value) => {
-      if (value.checked) result[value.name] = parseInt(value.value);
+      if (value.checked) {
+        const parsed = parseInt(value.value);
+        if (!isNaN(parsed)) result[value.name] = parsed;
+      }
     });
 
-    console.log(result);
-    const selectFormValue = document.querySelector('.form-select[name="39"]').value;
-    if (selectFormValue) result[39] = parseInt(selectFormValue);
-    console.log(result[39], "ini form select washed");
+    const selectForm = document.querySelector('.form-select[name="39"]');
+    if (selectForm && selectForm.value !== "") {
+      const parsedSelect = parseInt(selectForm.value);
+      if (!isNaN(parsedSelect)) result[39] = parsedSelect;
+    }
 
     function calcScore(score = 0) {
       for (let key in result) {
-        score += parseInt(result[key]);
+        if (typeof result[key] === "number") {
+          score += result[key];
+        }
       }
       return score / 10;
     }
 
     const totalScore = calcScore();
-    console.log(totalScore, "ini total score");
+    result["score"] = totalScore;
 
     function theOutput(output) {
       if (totalScore >= 65 && totalScore <= 73) {
         output += "Kurang Memuaskan";
-        result["score"] = totalScore;
-        result["output"] = output;
       } else if (totalScore >= 74 && totalScore <= 81) {
         output += "Memuaskan";
-        result["score"] = totalScore;
-        result["output"] = output;
       } else if (totalScore >= 82 && totalScore <= 88) {
         output += "Sangat Memuaskan";
-        result["score"] = totalScore;
-        result["output"] = output;
-        1;
       } else {
         output += "Score tidak memenuhi!";
-        result["score"] = totalScore;
-        result["output"] = output;
       }
+      result["output"] = output;
       return output;
     }
 
     const finalOutput = theOutput("");
-    console.log(finalOutput, "ini final output");
+    console.log(result, "Final result with score and output");
 
-    console.log(result.score, "ini score");
-
-    // const jsonTest = JSON.stringify(result);
-    // console.log(jsonTest);
-
-    // const postResponse = await fetch("", {
     const postResponse = await fetch("http://localhost:3000/api/data/addPengujian", {
       method: "POST",
-      // credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        form: {
-          ...result,
-        },
-      }),
+      body: JSON.stringify({ form: result }),
     });
 
-    // const data = await postResponse.json();
-    // console.log(data, "ini data");
     if (postResponse.ok) return (window.location.href = "./hasilPengujian.html");
   } catch (e) {
     console.error(e);
     alert(`Terjadi Kesalahan, Error: ${e.message}`);
   }
 };
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const modalWashed = document.getElementById("pengujianWashed");

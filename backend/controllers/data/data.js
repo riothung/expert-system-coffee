@@ -150,12 +150,13 @@ const insertPengujian = async (req, res) => {
       data: {
         date: new Date(),
         user: { connect: { id: 1 } },
+        pengguna: dataPengujian.pengguna,
         score: dataPengujian.score,
         output: dataPengujian.output,
       },
     });
     const formattedDate = new Date(insertHasilPengujian.date).toISOString().split("T")[0];
-    // console.log(dataPengujian);
+    console.log(dataPengujian);
     const keys = Object.keys(dataPengujian);
     if (dataPengujian) {
       for (let i = 0; i < keys.length; i++) {
@@ -177,7 +178,7 @@ const insertPengujian = async (req, res) => {
         }
       }
     }
-    return res.status(200).json({
+    if(insertHasilPengujian.ok) return res.status(200).json({
       message: "Data inserted successfully",
       data: {
         ...insertHasilPengujian,
@@ -256,6 +257,7 @@ const getHasilPengujian = async (req, res) => {
             username: true,
           },
         },
+        pengguna,
         pengujian: {
           include: {
             ciriVariabel: {
@@ -268,7 +270,7 @@ const getHasilPengujian = async (req, res) => {
       },
     });
 
-    return res.status(200).json({
+    if(hasilPengujianData.ok) return res.status(200).json({
       data: hasilPengujianData,
       message: "Data retrieved successfully!",
     });
@@ -277,6 +279,33 @@ const getHasilPengujian = async (req, res) => {
     return res.status(400).json({ message: e.message });
   }
 };
+
+// const getHasilPengujianUser = async (req, res) => {
+//   try {
+//     const hasilPengujianData = await prisma.hasilPengujian.findMany({
+//       include: {
+//         pengguna,
+//         pengujian: {
+//           include: {
+//             ciriVariabel: {
+//               include: {
+//                 variabel: true,
+//               },
+//             },
+//           },
+//         },
+//       },
+//     });
+    
+//     if(hasilPengujianData.ok) return res.status(200).json({
+//       data: hasilPengujianData,
+//       message: "Data retrieved successfully!",
+//     });
+//   } catch (e) {
+//     console.error(e);
+//     return res.status(400).json({ message: e.message });
+//   }
+// };
 
 // const getHasilPengujian = async (req, res) => {
 //   try {
@@ -370,6 +399,7 @@ module.exports = {
   getCiriVariabel,
   getDataNatural,
   getHasilPengujian,
+  // getHasilPengujianUser,
   deleteCiriVariabel,
   deleteHasilPengujian,
 };

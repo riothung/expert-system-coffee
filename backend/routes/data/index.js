@@ -7,6 +7,7 @@ router.get("/variabel", data.getVariabel);
 router.get("/ciriVariabel", data.getCiriVariabel);
 router.get("/dataNatural", data.getDataNatural);
 router.get("/hasilPengujian", data.getHasilPengujian);
+// router.get("hasilPengujianUser", data.getHasilPengujianUser);
 
 // router.get("/variabel", verifyToken, data.getVariabel);
 // router.get("/ciriVariabel", verifyToken, data.getCiriVariabel);
