@@ -419,25 +419,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // End of formWashed function
 
-function showSlider(event) {
-  event.preventDefault(); // stop form submit
+// function showSlider(event) {
+//   event.preventDefault(); // stop form submit
 
-  const name = document.getElementById("nameInput").value;
-  if (name.trim() !== "") {
-    // sembunyikan form
-    document.getElementById("nameForm").classList.add("d-none");
+//   const name = document.getElementById("nameInput").value;
+//   if (name.trim() !== "") {
+//     // sembunyikan form
+//     document.getElementById("nameForm").classList.add("d-none");
 
-    // tampilkan slider
-    document.getElementById("sliderContainer").classList.remove("d-none");
-  }
-}
+//     // tampilkan slider
+//     document.getElementById("sliderContainer").classList.remove("d-none");
+//   }
+// }
 
-const nameForm = document.getElementById("nameForm");
-// console.log(nameForm);
-nameForm.addEventListener("submit", (e) => {
-  e.preventDefault();
+// const nameForm = document.getElementById("nameForm");
+// // console.log(nameForm);
+// nameForm.addEventListener("submit", (e) => {
+//   e.preventDefault();
 
-  const getName = document.getElementById("nameInput").value;
-  var name = "";
-  name += getName;
-});
+//   const getName = document.getElementById("nameInput").value;
+//   var name = "";
+//   name += getName;
+// });

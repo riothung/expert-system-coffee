@@ -20,6 +20,7 @@ router.post("/addUser", data.insertUser);
 router.post("/addVariabel", data.insertVariabel);
 router.post("/addCiriVariabel", data.insertCiriVariabel);
 router.post("/addPengujian", data.insertPengujian);
+router.post("/addPengujianPengguna", data.insertPengujianPengguna);
 router.post("/addCiriVariabelReal", data.insertCiriVariabelReal);
 
 // router.post("/addUser", data.insertUser);

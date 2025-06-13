@@ -150,6 +150,56 @@ const insertPengujian = async (req, res) => {
       data: {
         date: new Date(),
         user: { connect: { id: 1 } },
+        score: dataPengujian.score,
+        output: dataPengujian.output,
+      },
+    });
+    const formattedDate = new Date(insertHasilPengujian.date).toISOString().split("T")[0];
+    console.log(dataPengujian);
+    const keys = Object.keys(dataPengujian);
+    if (dataPengujian) {
+      for (let i = 0; i < keys.length; i++) {
+        const key = keys[i];
+        const value = dataPengujian[key];
+        console.log(key);
+        const skipKeys = ["score", "output", "pengguna"];
+        const id_ciriVariabel = parseInt(key);
+        const formValue = parseInt(value);
+        if (!skipKeys.includes(key) && !isNaN(id_ciriVariabel) && !isNaN(formValue)) {
+          const pengujianUser = {
+            id_ciriVariabel: id_ciriVariabel,
+            id_hasilPengujian: insertHasilPengujian.id,
+            form: formValue,
+          };
+          await prisma.pengujian.create({
+            data: {
+              ...pengujianUser,
+            },
+          });
+          // console.log(pengujianUser);
+        }
+      }
+    }
+    if(insertHasilPengujian.ok) return res.status(200).json({
+      message: "Data inserted successfully",
+      data: {
+        ...insertHasilPengujian,
+        date: formattedDate,
+      },
+    });
+  } catch (e) {
+    console.error(e);
+    return res.status(400).json({ message: e.message });
+  }
+};
+
+const insertPengujianPengguna = async (req, res) => {
+  try {
+    const dataPengujian = req.body.form;
+    // console.log(dataPengujian, "test baru");
+    const insertHasilPengujian = await prisma.hasilPengujian.create({
+      data: {
+        date: new Date(),
         pengguna: dataPengujian.pengguna,
         score: dataPengujian.score,
         output: dataPengujian.output,
@@ -163,11 +213,14 @@ const insertPengujian = async (req, res) => {
         const key = keys[i];
         const value = dataPengujian[key];
         console.log(key);
-        if (key !== "score" && key !== "output") {
+        const skipKeys = ["score", "output", "pengguna"];
+        const id_ciriVariabel = parseInt(key);
+        const formValue = parseInt(value);
+        if (!skipKeys.includes(key) && !isNaN(id_ciriVariabel) && !isNaN(formValue)) {
           const pengujianUser = {
-            id_ciriVariabel: parseInt(key),
+            id_ciriVariabel: id_ciriVariabel,
             id_hasilPengujian: insertHasilPengujian.id,
-            form: parseInt(value),
+            form: formValue,
           };
           await prisma.pengujian.create({
             data: {
@@ -248,6 +301,7 @@ const getCiriVariabel = async (req, res) => {
 };
 
 // Hasil Pengujian data
+
 const getHasilPengujian = async (req, res) => {
   try {
     const hasilPengujianData = await prisma.hasilPengujian.findMany({
@@ -280,32 +334,32 @@ const getHasilPengujian = async (req, res) => {
   }
 };
 
-// const getHasilPengujianUser = async (req, res) => {
-//   try {
-//     const hasilPengujianData = await prisma.hasilPengujian.findMany({
-//       include: {
-//         pengguna,
-//         pengujian: {
-//           include: {
-//             ciriVariabel: {
-//               include: {
-//                 variabel: true,
-//               },
-//             },
-//           },
-//         },
-//       },
-//     });
+const getHasilPengujianPengguna = async (req, res) => {
+  try {
+    const hasilPengujianData = await prisma.hasilPengujian.findMany({
+      include: {
+        pengguna,
+        pengujian: {
+          include: {
+            ciriVariabel: {
+              include: {
+                variabel: true,
+              },
+            },
+          },
+        },
+      },
+    });
     
-//     if(hasilPengujianData.ok) return res.status(200).json({
-//       data: hasilPengujianData,
-//       message: "Data retrieved successfully!",
-//     });
-//   } catch (e) {
-//     console.error(e);
-//     return res.status(400).json({ message: e.message });
-//   }
-// };
+    if(hasilPengujianData.ok) return res.status(200).json({
+      data: hasilPengujianData,
+      message: "Data retrieved successfully!",
+    });
+  } catch (e) {
+    console.error(e);
+    return res.status(400).json({ message: e.message });
+  }
+};
 
 // const getHasilPengujian = async (req, res) => {
 //   try {
@@ -395,10 +449,12 @@ module.exports = {
   insertCiriVariabel,
   insertCiriVariabelReal,
   insertPengujian,
+  insertPengujianPengguna,
   getVariabel,
   getCiriVariabel,
   getDataNatural,
   getHasilPengujian,
+  getHasilPengujianPengguna,
   // getHasilPengujianUser,
   deleteCiriVariabel,
   deleteHasilPengujian,

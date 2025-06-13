@@ -50,6 +50,8 @@ const formNatural = async () => {
     const checkboxesValues = document.querySelectorAll("[type=checkbox]");
     let result = {};
 
+    if (getUsersName) result["pengguna"] = getUsersName;
+
     checkboxesValues.forEach((value) => {
       if (value.checked) result[value.name] = parseInt(value.value);
     });
@@ -99,7 +101,7 @@ const formNatural = async () => {
     // console.log(jsonTest);
 
     // const postResponse = await fetch("", {
-    const postResponse = await fetch("http://localhost:3000/api/data/addPengujian", {
+    const postResponse = await fetch("http://localhost:3000/api/data/addPengujianPengguna", {
       method: "POST",
       // credentials: "include",
       headers: {
@@ -114,7 +116,7 @@ const formNatural = async () => {
 
     // const data = await postResponse.json();
     // console.log(data, "ini data");
-    if (postResponse.ok) return (window.location.href = "./hasilPengujian.html");
+    if (postResponse.ok) return window.location.reload();
   } catch (e) {
     console.error(e);
     alert(`Terjadi Kesalahan, Error: ${e.message}`);
@@ -175,6 +177,8 @@ const formHoney = async () => {
     const checkboxesValues = document.querySelectorAll("[type=checkbox]");
     let result = {};
 
+    if (getUsersName) result["pengguna"] = getUsersName;
+
     checkboxesValues.forEach((value) => {
       if (value.checked) result[value.name] = parseInt(value.value);
     });
@@ -224,7 +228,7 @@ const formHoney = async () => {
     console.log(jsonTest);
 
     // const postResponse = await fetch("", {
-    const postResponse = await fetch("http://localhost:3000/api/data/addPengujian", {
+    const postResponse = await fetch("http://localhost:3000/api/data/addPengujianPengguna", {
       method: "POST",
       // credentials: "include",
       headers: {
@@ -239,7 +243,7 @@ const formHoney = async () => {
 
     const data = await postResponse.json();
     console.log(data, "ini data");
-    if (postResponse.ok) return (window.location.href = "./hasilPengujian.html");
+    if (postResponse.ok) return window.location.reload();
   } catch (e) {
     console.error(e);
     alert(`Terjadi Kesalahan, Error: ${e.message}`);
@@ -344,7 +348,7 @@ const formWashed = async () => {
     const finalOutput = theOutput("");
     console.log(result, "Final result with score and output");
 
-    const postResponse = await fetch("http://localhost:3000/api/data/addPengujian", {
+    const postResponse = await fetch("http://localhost:3000/api/data/addPengujianPengguna", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -352,7 +356,7 @@ const formWashed = async () => {
       body: JSON.stringify({ form: result }),
     });
 
-    if (postResponse.ok) return (window.location.href = "./hasilPengujian.html");
+    if (postResponse.ok) return window.location.reload();
   } catch (e) {
     console.error(e);
     alert(`Terjadi Kesalahan, Error: ${e.message}`);
