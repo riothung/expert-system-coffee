@@ -180,7 +180,8 @@ const insertPengujian = async (req, res) => {
         }
       }
     }
-    if(insertHasilPengujian.ok) return res.status(200).json({
+
+    return res.status(200).json({
       message: "Data inserted successfully",
       data: {
         ...insertHasilPengujian,
@@ -196,46 +197,54 @@ const insertPengujian = async (req, res) => {
 const insertPengujianPengguna = async (req, res) => {
   try {
     const dataPengujian = req.body.form;
-    // console.log(dataPengujian, "test baru");
+
+    if (isNaN(parseInt(dataPengujian.score))) {
+      return res.status(400).json({ message: "Score harus berupa angka." });
+    }
+
     const insertHasilPengujian = await prisma.hasilPengujian.create({
       data: {
         date: new Date(),
         pengguna: dataPengujian.pengguna,
-        score: dataPengujian.score,
+        score: parseInt(dataPengujian.score),
         output: dataPengujian.output,
       },
     });
-    const formattedDate = new Date(insertHasilPengujian.date).toISOString().split("T")[0];
-    console.log(dataPengujian);
+
+    const pengujianList = [];
+
     const keys = Object.keys(dataPengujian);
-    if (dataPengujian) {
-      for (let i = 0; i < keys.length; i++) {
-        const key = keys[i];
-        const value = dataPengujian[key];
-        console.log(key);
-        const skipKeys = ["score", "output", "pengguna"];
-        const id_ciriVariabel = parseInt(key);
-        const formValue = parseInt(value);
-        if (!skipKeys.includes(key) && !isNaN(id_ciriVariabel) && !isNaN(formValue)) {
-          const pengujianUser = {
-            id_ciriVariabel: id_ciriVariabel,
+    for (let key of keys) {
+      if (["score", "output", "pengguna"].includes(key)) continue;
+      const id_ciriVariabel = parseInt(key);
+      const formValue = parseInt(dataPengujian[key]);
+      if (!isNaN(id_ciriVariabel) && !isNaN(formValue)) {
+        const createdPengujian = await prisma.pengujian.create({
+          data: {
+            id_ciriVariabel,
             id_hasilPengujian: insertHasilPengujian.id,
             form: formValue,
-          };
-          await prisma.pengujian.create({
-            data: {
-              ...pengujianUser,
+          },
+          include: {
+            ciriVariabel: {
+              include: {
+                variabel: true,
+              },
             },
-          });
-          // console.log(pengujianUser);
-        }
+          },
+        });
+        pengujianList.push(createdPengujian);
       }
     }
-    if(insertHasilPengujian.ok) return res.status(200).json({
+
+    const formattedDate = new Date(insertHasilPengujian.date).toISOString().split("T")[0];
+
+    return res.status(200).json({
       message: "Data inserted successfully",
       data: {
         ...insertHasilPengujian,
         date: formattedDate,
+        pengujian: pengujianList,
       },
     });
   } catch (e) {
@@ -243,6 +252,7 @@ const insertPengujianPengguna = async (req, res) => {
     return res.status(400).json({ message: e.message });
   }
 };
+
 
 // End of POST method
 
@@ -324,7 +334,7 @@ const getHasilPengujian = async (req, res) => {
       },
     });
 
-    if(hasilPengujianData.ok) return res.status(200).json({
+    return res.status(200).json({
       data: hasilPengujianData,
       message: "Data retrieved successfully!",
     });
@@ -351,7 +361,7 @@ const getHasilPengujianPengguna = async (req, res) => {
       },
     });
     
-    if(hasilPengujianData.ok) return res.status(200).json({
+    return res.status(200).json({
       data: hasilPengujianData,
       message: "Data retrieved successfully!",
     });

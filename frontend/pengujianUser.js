@@ -45,6 +45,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // function that pass the natural's form datas
 
+let naturalModalInstance = null;
+let detailModalInstance = null;
+
 const formNatural = async () => {
   try {
     const checkboxesValues = document.querySelectorAll("[type=checkbox]");
@@ -57,15 +60,23 @@ const formNatural = async () => {
     });
 
     console.log(result);
+
     const selectFormValue = document.querySelector('.form-select[name="37"]').value;
     if (selectFormValue) result[37] = parseInt(selectFormValue);
     console.log(result[37], "ini form select natural");
 
     function calcScore(score = 0) {
+      let count = 0;
       for (let key in result) {
-        score += parseInt(result[key]);
+        if (!isNaN(key)) {
+          const val = parseInt(result[key]);
+          if (!isNaN(val)) {
+            score += val;
+            count++;
+          }
+        }
       }
-      return score / 10;
+      return count > 0 ? score / count : 0;
     }
 
     const totalScore = calcScore();
@@ -74,55 +85,112 @@ const formNatural = async () => {
     function theOutput(output) {
       if (totalScore >= 65 && totalScore <= 74) {
         output += "Kurang Memuaskan";
-        result["score"] = totalScore;
-        result["output"] = output;
       } else if (totalScore >= 75 && totalScore <= 84) {
         output += "Memuaskan";
-        result["score"] = totalScore;
-        result["output"] = output;
       } else if (totalScore >= 85 && totalScore <= 94) {
         output += "Sangat Memuaskan";
-        result["score"] = totalScore;
-        result["output"] = output;
       } else {
         output += "Score tidak memenuhi!";
-        result["score"] = totalScore;
-        result["output"] = output;
       }
+
+      result["score"] = totalScore;
+      result["output"] = output;
       return output;
     }
 
     const finalOutput = theOutput("");
     console.log(finalOutput, "ini final output");
+    console.log(result, "final result sebelum POST");
+    console.log(typeof result.score, result.score);
 
-    console.log(result.score, "ini score");
-
-    // const jsonTest = JSON.stringify(result);
-    // console.log(jsonTest);
-
-    // const postResponse = await fetch("", {
     const postResponse = await fetch("http://localhost:3000/api/data/addPengujianPengguna", {
       method: "POST",
-      // credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        form: {
-          ...result,
-        },
-      }),
+      body: JSON.stringify({ form: result }),
     });
 
-    // const data = await postResponse.json();
-    // console.log(data, "ini data");
-    if (postResponse.ok) return window.location.reload();
+    if (postResponse.ok) {
+      const responseData = await postResponse.json();
+
+      // Tutup modal "pengujianNatural" (manual instance, Bootstrap 4)
+      const modalElement = document.getElementById("naturalModal");
+      if (!naturalModalInstance) {
+        naturalModalInstance = new bootstrap.Modal(modalElement);
+      }
+      $(modalElement).modal('hide'); // jQuery Bootstrap 4 way
+
+      // Tampilkan hasil
+      showHasilModal(responseData.data);
+    }
   } catch (e) {
     console.error(e);
     alert(`Terjadi Kesalahan, Error: ${e.message}`);
   }
 };
 
+function showHasilModal(data) {
+  const modalElement = document.getElementById("detailHasilPengujian");
+
+  if (!detailModalInstance) {
+    detailModalInstance = new bootstrap.Modal(modalElement);
+  }
+
+  let tableContent = `
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Variabel</th>
+          <th>Ciri Variabel</th>
+          <th>Bobot</th>
+        </tr>
+      </thead>
+      <tbody>`;
+
+  data.pengujian.forEach((item) => {
+    tableContent += `
+      <tr>
+        <td>${item.ciriVariabel?.variabel?.variabel ?? "Data tidak tersedia"}</td>
+        <td>${item.ciriVariabel?.ciri ?? "Data tidak tersedia"}</td>
+        <td>${item.form}</td>
+      </tr>`;
+  });
+
+  tableContent += `</tbody></table>`;
+
+  const feedback =
+    data.output === "Kurang Memuaskan"
+      ? "1. Penting untuk menjaga konsistensi selama proses evaluasi agar hasil lebih mendekati referensi pakar. 2. Lakukan evaluasi menyeluruh terhadap pelaksanaan sistem guna meningkatkan akurasi hasil"
+      : data.output === "Memuaskan"
+      ? "Kinerja penilaian menunjukkan hasil yang baik. Pertahankan konsistensi evaluasi agar tetap selaras dengan referensi pakar."
+      : data.output === "Sangat Memuaskan"
+      ? "Hasil yang sangat memuaskan! Pertahankan kualitas dan konsistensi yang telah dicapai!"
+      : "Score tidak memenuhi, tidak ada saran";
+
+  tableContent += `
+    <hr>
+    <div class="container mt-4">
+      <div class="row align-items-center">
+        <div class="col-md-4 text-center text-md-left">
+          <div><strong>OVERALL SCORE:</strong> <span style="color:#F2613F">${data.score}</span></div>
+          <div><strong>Kategori:</strong> ${data.output}</div>
+        </div>
+        <div class="col-md-8 text-center">
+          <div class="saran-label font-weight-bold mb-2">Feedback</div>
+          <div class="saran-box mx-auto p-3" style="border: 1px solid #000; border-radius: 20px; height: 100px; width: 80%; overflow-y: auto;">
+            <p style="text-align: justify;">${feedback}</p>
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+  document.querySelector(".modal-body").innerHTML = tableContent;
+  document.getElementById("exampleModalLabel").innerText = `Detail Hasil Pengujian #${data.id}`;
+  $(modalElement).modal('show'); // Bootstrap 4 way
+}
+
+// Listener saat form disubmit
 document.addEventListener("DOMContentLoaded", () => {
   const modalNatural = document.getElementById("pengujianNatural");
   modalNatural.addEventListener("submit", (e) => {
@@ -136,15 +204,12 @@ document.addEventListener("DOMContentLoaded", () => {
       let foundChecked = false;
       let current = section.nextElementSibling;
 
-      // Loop sampai h5 berikutnya
       while (current && current.tagName !== "H5") {
-        // Cek checkbox
         const checkboxes = current.querySelectorAll('input[type="checkbox"]');
         checkboxes.forEach((cb) => {
           if (cb.checked) foundChecked = true;
         });
 
-        // Jika bagian ini adalah Natural Acid, cek juga select
         if (sectionTitle.includes("Natural Acid")) {
           const selects = current.querySelectorAll("select");
           selects.forEach((select) => {
@@ -158,7 +223,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!foundChecked) {
         alert(`Bagian "${sectionTitle}" wajib dipilih salah satu.`);
         isValid = false;
-        break; // stop looping jika satu saja tidak valid
+        break;
       }
     }
 
@@ -167,6 +232,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 // End of Pasca Panen Natural
 
