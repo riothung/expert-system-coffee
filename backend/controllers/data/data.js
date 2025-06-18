@@ -321,7 +321,6 @@ const getHasilPengujian = async (req, res) => {
             username: true,
           },
         },
-        pengguna,
         pengujian: {
           include: {
             ciriVariabel: {
@@ -333,6 +332,16 @@ const getHasilPengujian = async (req, res) => {
         },
       },
     });
+
+    // const hasilDenganNamaPengguna = hasilPengujianData.map((item) => ({
+    //   ...item,
+    //   username: item.user?.username || item.pengguna || null,
+    // }));
+
+    // return res.status(200).json({
+    //   data: hasilDenganNamaPengguna,
+    //   message: "Data retrieved successfully!",
+    // });
 
     return res.status(200).json({
       data: hasilPengujianData,
