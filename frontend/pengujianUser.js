@@ -48,6 +48,81 @@ document.addEventListener("DOMContentLoaded", function () {
 let naturalModalInstance = null;
 let detailModalInstance = null;
 
+function showHasilModal(data) {
+  console.log("DATA MASUK MODAL", data);
+
+  const modalElement = document.getElementById("detailHasilPengujian");
+
+  if (!detailModalInstance) {
+    detailModalInstance = new bootstrap.Modal(modalElement);
+  }
+
+  let tableContent = `
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Variabel</th>
+          <th>Ciri Variabel</th>
+          <th>Bobot</th>
+        </tr>
+      </thead>
+      <tbody>`;
+
+  data.pengujian.forEach((item) => {
+    tableContent += `
+      <tr>
+        <td>${item.ciriVariabel?.variabel?.variabel ?? "Data tidak tersedia"}</td>
+        <td>${item.ciriVariabel?.ciri ?? "Data tidak tersedia"}</td>
+        <td>${item.form}</td>
+      </tr>`;
+  });
+
+  tableContent += `</tbody></table>`;
+
+  const feedback =
+    data.output === "Kurang Memuaskan"
+      ? "1. Penting untuk menjaga konsistensi selama proses evaluasi agar hasil lebih mendekati referensi pakar. 2. Lakukan evaluasi menyeluruh terhadap pelaksanaan sistem guna meningkatkan akurasi hasil"
+      : data.output === "Memuaskan"
+      ? "Kinerja penilaian menunjukkan hasil yang baik. Pertahankan konsistensi evaluasi agar tetap selaras dengan referensi pakar."
+      : data.output === "Sangat Memuaskan"
+      ? "Hasil yang sangat memuaskan! Pertahankan kualitas dan konsistensi yang telah dicapai!"
+      : "Score tidak memenuhi, tidak ada saran";
+
+  tableContent += `
+    <hr>
+    <div class="container mt-4">
+      <div class="row align-items-center">
+        <div class="col-md-4 text-center text-md-left">
+          <div><strong>OVERALL SCORE:</strong> <span style="color:#F2613F">${data.score}</span></div>
+          <div><strong>Kategori:</strong> ${data.output}</div>
+        </div>
+        <div class="col-md-8 text-center">
+          <div class="saran-label font-weight-bold mb-2">Feedback</div>
+          <div class="saran-box mx-auto p-3" style="border: 1px solid #000; border-radius: 20px; height: 100px; width: 80%; overflow-y: auto;">
+            <p style="text-align: justify;">${feedback}</p>
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+  modalElement.querySelector(".modal-body").innerHTML = tableContent;
+  modalElement.querySelector(".modal-title").innerText = `Detail Hasil Pengujian #${data.id}`;
+  $(modalElement).modal('show'); // Bootstrap 4 way
+
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const closeBtn = document.querySelector("#detailHasilPengujian .close");
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      setTimeout(() => {
+        window.location.href = "./pengujianUser.html";
+      }, 500);
+    });
+  }
+});
+
+
 const formNatural = async () => {
   try {
     const checkboxesValues = document.querySelectorAll("[type=checkbox]");
@@ -114,6 +189,8 @@ const formNatural = async () => {
     if (postResponse.ok) {
       const responseData = await postResponse.json();
 
+      console.log("Response dari server:", responseData);
+
       // Tutup modal "pengujianNatural" (manual instance, Bootstrap 4)
       const modalElement = document.getElementById("naturalModal");
       if (!naturalModalInstance) {
@@ -130,65 +207,7 @@ const formNatural = async () => {
   }
 };
 
-function showHasilModal(data) {
-  const modalElement = document.getElementById("detailHasilPengujian");
 
-  if (!detailModalInstance) {
-    detailModalInstance = new bootstrap.Modal(modalElement);
-  }
-
-  let tableContent = `
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Variabel</th>
-          <th>Ciri Variabel</th>
-          <th>Bobot</th>
-        </tr>
-      </thead>
-      <tbody>`;
-
-  data.pengujian.forEach((item) => {
-    tableContent += `
-      <tr>
-        <td>${item.ciriVariabel?.variabel?.variabel ?? "Data tidak tersedia"}</td>
-        <td>${item.ciriVariabel?.ciri ?? "Data tidak tersedia"}</td>
-        <td>${item.form}</td>
-      </tr>`;
-  });
-
-  tableContent += `</tbody></table>`;
-
-  const feedback =
-    data.output === "Kurang Memuaskan"
-      ? "1. Penting untuk menjaga konsistensi selama proses evaluasi agar hasil lebih mendekati referensi pakar. 2. Lakukan evaluasi menyeluruh terhadap pelaksanaan sistem guna meningkatkan akurasi hasil"
-      : data.output === "Memuaskan"
-      ? "Kinerja penilaian menunjukkan hasil yang baik. Pertahankan konsistensi evaluasi agar tetap selaras dengan referensi pakar."
-      : data.output === "Sangat Memuaskan"
-      ? "Hasil yang sangat memuaskan! Pertahankan kualitas dan konsistensi yang telah dicapai!"
-      : "Score tidak memenuhi, tidak ada saran";
-
-  tableContent += `
-    <hr>
-    <div class="container mt-4">
-      <div class="row align-items-center">
-        <div class="col-md-4 text-center text-md-left">
-          <div><strong>OVERALL SCORE:</strong> <span style="color:#F2613F">${data.score}</span></div>
-          <div><strong>Kategori:</strong> ${data.output}</div>
-        </div>
-        <div class="col-md-8 text-center">
-          <div class="saran-label font-weight-bold mb-2">Feedback</div>
-          <div class="saran-box mx-auto p-3" style="border: 1px solid #000; border-radius: 20px; height: 100px; width: 80%; overflow-y: auto;">
-            <p style="text-align: justify;">${feedback}</p>
-          </div>
-        </div>
-      </div>
-    </div>`;
-
-  document.querySelector(".modal-body").innerHTML = tableContent;
-  document.getElementById("exampleModalLabel").innerText = `Detail Hasil Pengujian #${data.id}`;
-  $(modalElement).modal('show'); // Bootstrap 4 way
-}
 
 // Listener saat form disubmit
 document.addEventListener("DOMContentLoaded", () => {
@@ -255,10 +274,17 @@ const formHoney = async () => {
     console.log(result[38], "ini form select honey");
 
     function calcScore(score = 0) {
+      let count = 0;
       for (let key in result) {
-        score += parseInt(result[key]);
+        if (!isNaN(key)) {
+          const val = parseInt(result[key]);
+          if (!isNaN(val)) {
+            score += val;
+            count++;
+          }
+        }
       }
-      return score / 10;
+      return count > 0 ? score / count : 0;
     }
 
     const totalScore = calcScore();
@@ -267,31 +293,23 @@ const formHoney = async () => {
     function theOutput(output) {
       if (totalScore >= 65 && totalScore <= 73) {
         output += "Kurang Memuaskan";
-        result["score"] = totalScore;
-        result["output"] = output;
       } else if (totalScore >= 74 && totalScore <= 81) {
         output += "Memuaskan";
-        result["score"] = totalScore;
-        result["output"] = output;
       } else if (totalScore >= 82 && totalScore <= 88) {
         output += "Sangat Memuaskan";
-        result["score"] = totalScore;
-        result["output"] = output;
       } else {
         output += "Score tidak memenuhi!";
-        result["score"] = totalScore;
-        result["output"] = output;
       }
+
+      result["score"] = totalScore;
+      result["output"] = output;
       return output;
     }
 
     const finalOutput = theOutput("");
     console.log(finalOutput, "ini final output");
-
-    console.log(result.score, "ini score");
-
-    const jsonTest = JSON.stringify(result);
-    console.log(jsonTest);
+    console.log(result, "final result sebelum POST");
+    console.log(typeof result.score, result.score);
 
     // const postResponse = await fetch("", {
     const postResponse = await fetch("http://localhost:3000/api/data/addPengujianPengguna", {
@@ -300,16 +318,24 @@ const formHoney = async () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        form: {
-          ...result,
-        },
-      }),
+      body: JSON.stringify({ form: result }),
     });
 
-    const data = await postResponse.json();
-    console.log(data, "ini data");
-    if (postResponse.ok) return window.location.reload();
+   if (postResponse.ok) {
+      const responseData = await postResponse.json();
+
+      console.log("Response dari server:", responseData);
+
+      // Tutup modal "pengujianNatural" (manual instance, Bootstrap 4)
+      const modalElement = document.getElementById("honeyModal");
+      if (!naturalModalInstance) {
+        naturalModalInstance = new bootstrap.Modal(modalElement);
+      }
+      $(modalElement).modal('hide'); // jQuery Bootstrap 4 way
+
+      // Tampilkan hasil
+      showHasilModal(responseData.data);
+    }
   } catch (e) {
     console.error(e);
     alert(`Terjadi Kesalahan, Error: ${e.message}`);
@@ -386,12 +412,17 @@ const formWashed = async () => {
     }
 
     function calcScore(score = 0) {
+      let count = 0;
       for (let key in result) {
-        if (typeof result[key] === "number") {
-          score += result[key];
+        if (!isNaN(key)) {
+          const val = parseInt(result[key]);
+          if (!isNaN(val)) {
+            score += val;
+            count++;
+          }
         }
       }
-      return score / 10;
+      return count > 0 ? score / count : 0;
     }
 
     const totalScore = calcScore();
@@ -407,12 +438,16 @@ const formWashed = async () => {
       } else {
         output += "Score tidak memenuhi!";
       }
+
+      result["score"] = totalScore;
       result["output"] = output;
       return output;
     }
 
     const finalOutput = theOutput("");
-    console.log(result, "Final result with score and output");
+    console.log(finalOutput, "ini final output");
+    console.log(result, "final result sebelum POST");
+    console.log(typeof result.score, result.score);
 
     const postResponse = await fetch("http://localhost:3000/api/data/addPengujianPengguna", {
       method: "POST",
@@ -422,7 +457,21 @@ const formWashed = async () => {
       body: JSON.stringify({ form: result }),
     });
 
-    if (postResponse.ok) return window.location.reload();
+    if (postResponse.ok) {
+      const responseData = await postResponse.json();
+
+      console.log("Response dari server:", responseData);
+
+      // Tutup modal "pengujianNatural" (manual instance, Bootstrap 4)
+      const modalElement = document.getElementById("washedModal");
+      if (!naturalModalInstance) {
+        naturalModalInstance = new bootstrap.Modal(modalElement);
+      }
+      $(modalElement).modal('hide'); // jQuery Bootstrap 4 way
+
+      // Tampilkan hasil
+      showHasilModal(responseData.data);
+    }
   } catch (e) {
     console.error(e);
     alert(`Terjadi Kesalahan, Error: ${e.message}`);
