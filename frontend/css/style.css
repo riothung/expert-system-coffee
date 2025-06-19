@@ -1,0 +1,21 @@
+  .slider-wrapper {
+    display: flex;
+    width: 300%;
+    transition: transform 0.6s ease-in-out;
+  }
+
+  .slide-section {
+    width: 100vw;
+    flex-shrink: 0;
+    height: 100vh;
+    overflow-y: auto;
+    padding-top: 70px; /* supaya konten tidak tertutup navbar */
+  }
+
+  body {
+    overflow: hidden;
+  }
+
+  .nav-link {
+    cursor: pointer;
+  }
