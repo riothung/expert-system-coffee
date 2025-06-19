@@ -12,7 +12,7 @@
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css" />
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet" />
@@ -20,107 +20,108 @@
   </head>
 
   <body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light m-2 bg-light fixed-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Expert System</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav mx-auto">
-          <a class="nav-link" onclick="goToSlide(0)">Home</a>
-          <a class="nav-link" onclick="goToSlide(1)">Variabel Cupping</a>
-          <a class="nav-link" onclick="goToSlide(2)">Ciri Variabel</a>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light m-2 bg-light fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Expert System</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav mx-auto">
+            <a class="nav-link" onclick="goToSlide(0)">Home</a>
+            <a class="nav-link" onclick="goToSlide(1)">Variabel Cupping</a>
+            <a class="nav-link" onclick="goToSlide(2)">Ciri Variabel</a>
+          </div>
         </div>
+        <a class="btn btn-sm btn-secondary" href="login.html">ADMIN ?</a>
       </div>
-      <a class="btn btn-sm btn-secondary" href="login.html">ADMIN ?</a>
-    </div>
-  </nav>
+    </nav>
 
-  <!-- Wrapper -->
-  <div class="slider-wrapper" id="sliderWrapper">
-    <!-- HOME -->
-    <section class="slide-section bg-white" id="home">
-      <div class="container-fluid p-5">
-        <h2 class="text-center mb-4">SISTEM PAKAR MENENTUKAN KUALITAS KOPI <br> JENIS ARABIKA PADA SETIAP PASCA PANEN</h2>
-        <div class="container my-5">
-          <div class="row justify-content-center">
-            <div class="col-md-10 col-lg-8">
-              <div class="card shadow-sm border-0 rounded-lg">
-                <div class="card-body">
-                  <h4 class="text-center font-weight-bold mb-4 text-dark">Sejarah dan Tantangan Kopi Arabika</h4>
-                  <div class="text-center mb-4">
-                    <img src="img/kopi.png" width="250" height="250" class="rounded-circle img-fluid shadow kopi" alt="Kopi">
-                  </div>
-                  <p class="text-justify">
-                    Di antara berbagai jenis kopi, Arabika menorehkan sejarah sebagai kopi pertama yang menjejakkan kakinya di tanah air...
-                  </p>
-                  <p class="text-center font-weight-bold text-dark mt-4 mb-5" style="font-size: 1.1rem;">
-                    Sistem pakar adalah suatu sistem yang berupaya mentransfer pengetahuan manusia ke komputer...
-                  </p>
-                  <div class="text-center">
-                    <a href="pengujian.html" class="btn btn-dark btn-md px-4 py-2">Mulai</a>
+    <!-- Wrapper -->
+    <div class="slider-wrapper" id="sliderWrapper">
+      <!-- HOME -->
+      <section class="slide-section bg-white" id="home">
+        <div class="container-fluid p-3">
+          <h2 class="text-center mb-2">
+            SISTEM PAKAR MENENTUKAN KUALITAS KOPI <br />
+            JENIS ARABIKA PADA SETIAP PASCA PANEN
+          </h2>
+          <div class="container my-3">
+            <div class="row justify-content-center">
+              <div class="col-md-7 col-lg-10">
+                <div class="card shadow-sm border-0 rounded-lg">
+                  <div class="card-body">
+                    <h4 class="text-center font-weight-bold mb-4 text-dark">Sejarah dan Tantangan Kopi Arabika</h4>
+                    <div class="text-center mb-4">
+                      <img src="img/kopi.png" width="250" height="250" class="rounded-circle img-fluid shadow kopi" alt="Kopi" />
+                    </div>
+                    <p class="text-justify">
+                      Di antara berbagai jenis kopi, Arabika menorehkan sejarah sebagai kopi pertama yang menjejakkan kakinya di tanah air. Biji kopi ini berkembang pesat di ketinggian ideal antara 1.000 hingga 1.200 meter di atas permukaan
+                      laut. Semakin tinggi lokasi penanaman, semakin istimewa pula rasa yang dihasilkan dari biji kopi ini.
+                    </p>
+                    <p class="text-center font-weight-bold text-dark mt-4 mb-5" style="font-size: 1.1rem">
+                      Sistem pakar adalah suatu sistem yang berupaya mentransfer pengetahuan manusia ke komputer sehingga komputer tersebut dapat memecahkan masalah dengan cara yang biasa dilakukan para pakar.
+                    </p>
+                    <div class="text-center">
+                      <a href="pengujianUser.html" class="btn btn-dark btn-md px-4 py-2">Mulai</a>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- VARIABEL CUPPING -->
-    <section class="slide-section bg-white" id="variable">
-      <div class="container-fluid px-4">
-        <h1 class="mt-4">Variabel Cupping</h1>
-        <div class="card-body">
-          <table class="table">
-            <thead>
-              <tr>
-                <th style="text-align: center;">No</th>
-                <th style="text-align: center;">Kode</th>
-                <th style="text-align: center;">Variabel</th>
-                <th style="text-align: center;">Jenis Pasca Panen</th>
-                <th style="text-align: center;">Action</th>
-              </tr>
-            </thead>
-            <tbody id="variabel"></tbody>
-          </table>
+      <!-- VARIABEL CUPPING -->
+      <section class="slide-section bg-white" id="variable">
+        <div class="container-fluid px-4">
+          <h1 class="mt-4">Variabel Cupping</h1>
+          <div class="card-body">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Kode</th>
+                  <th>Variabel</th>
+                  <th>Jenis Pasca Panen</th>
+                </tr>
+              </thead>
+              <tbody id="variabel"></tbody>
+            </table>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-  <!-- CIRI VARIABEL -->
-    <section class="slide-section bg-light" id="ciri">
-      <div class="container-fluid px-4">
-        <h1 class="mt-4">Ciri Variabel Cupping</h1>
-        <div class="card-body">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Kode</th>
-                <th>Ciri Variabel</th>
-                <th>Jenis Pasca Panen</th>
-                <th>Bobot</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody id="ciriVariabel"></tbody>
-          </table>
+      <!-- CIRI VARIABEL -->
+      <section class="slide-section bg-light" id="ciri">
+        <div class="container-fluid px-4">
+          <h1 class="mt-4">Ciri Variabel Cupping</h1>
+          <div class="card-body">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Kode</th>
+                  <th>Ciri Variabel</th>
+                  <th>Jenis Pasca Panen</th>
+                  <th>Bobot</th>
+                </tr>
+              </thead>
+              <tbody id="ciriVariabel"></tbody>
+            </table>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
 
-  </div>
-
-  <script>
-    function goToSlide(index) {
-      const wrapper = document.getElementById('sliderWrapper');
-      wrapper.style.transform = `translateX(-${index * 100}vw)`;
-    }
-  </script>
+    <script>
+      function goToSlide(index) {
+        const wrapper = document.getElementById("sliderWrapper");
+        wrapper.style.transform = `translateX(-${index * 100}vw)`;
+      }
+    </script>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -134,11 +135,13 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
+    <script src="variabelForUser.js"></script>
+
     <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
+    <!-- <script src="vendor/chart.js/Chart.min.js"></script> -->
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
+    <!-- <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script> -->
   </body>
 </html>

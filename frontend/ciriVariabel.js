@@ -1,6 +1,6 @@
 // GET ciri variabel data and inserted in table
 const ciriVariabelTable = document.getElementById("ciriVariabel");
-const getVariabelData = async () => {
+const getCiriVariabelData = async () => {
   try {
     const ciriVariabelData = await fetch("http://localhost:3000/api/data/ciriVariabel");
     const convertToJson = await ciriVariabelData.json();
@@ -116,7 +116,7 @@ const getVariabelData = async () => {
   }
 };
 
-getVariabelData();
+getCiriVariabelData();
 //
 
 // styling all text in table
