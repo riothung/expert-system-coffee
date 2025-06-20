@@ -21,6 +21,7 @@ router.post("/addVariabel", data.insertVariabel);
 router.post("/addCiriVariabel", data.insertCiriVariabel);
 router.post("/addPengujian", data.insertPengujian);
 router.post("/addPengujianPengguna", data.insertPengujianPengguna);
+router.post("/addVariabelReal", data.insertVariabelReal);
 router.post("/addCiriVariabelReal", data.insertCiriVariabelReal);
 
 // router.post("/addUser", data.insertUser);
@@ -31,10 +32,12 @@ router.post("/addCiriVariabelReal", data.insertCiriVariabelReal);
 //
 
 // Method PUT
-
+router.put("/updateVariabel/:id", data.updateVariabelData);
+router.put("/updateCiriVariabel/:id", data.updateCiriVariabelData);
 //
 
 // Method DELETE
+router.delete("/deleteVariabel/:id", data.deleteVariabel);
 router.delete("/deleteCiriVariabel/:id", data.deleteCiriVariabel);
 router.delete("/deleteHasilPengujian/:id", data.deleteHasilPengujian);
 

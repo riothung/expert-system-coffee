@@ -159,6 +159,9 @@
             <h1 class="mt-4">Variabel Cupping</h1>
             <div class="card-body">
             <table class="table">
+              <button type="button" class="btn btn-dark mb-3" data-bs-toggle="modal" data-bs-target="#tambahVariabel">
+            Tambah Data
+            </button>
             <thead>
               <tr>
                 <th scope="col" style="text-align: center;">No</th>
@@ -175,6 +178,64 @@
         </main>
         </div>
         <!-- End of Main Content -->
+
+  <div class="modal fade" id="tambahVariabel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data Variabel</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div style="margin-left: 10px; margin-right: 10px;">
+        <form id="variabelForm">
+        <div class="mb-3">
+          <label class="form-label">Kode</label>
+          <input type="text" name="kode" id="kodeVariabel" class="form-control" required>
+      </div>
+        <div class="mb-3">
+          <label class="form-label">Variabel</label>
+          <input type="text" id="variabelText" name="variabel" class="form-control" required>
+      </div>
+        <div class="mb-3">
+              <label for="jenisPascaPanen" class="form-label">Jenis Pasca Panen</label>
+              <select name="pasca_panen" class="form-control" id="idJenis" class="addOption" required> 
+                  <option value="" disabled selected hidden>Pilih Jenis Pasca Panen</option>
+                  <option value="umum">Umum</option>
+                  <option value="natural">Natural</option>
+                  <option value="honey">Honey</option>
+                  <option value="washed">Washed</option>
+              </select>
+          </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end of modal -->
+
+<!-- Modal edit Variabel -->
+<div class="modal fade" id="editVariabel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Variabel</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="updateVariabel">Save changes</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+<!-- end of modal -->
 
         <!-- Footer -->
         <footer class="sticky-footer bg-white">
@@ -214,22 +275,22 @@
       </div>
     </div>
 
-    <script src="variabel.js"></script>
-
+    
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script> -->
+    
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
+    
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-
+    
+    <script src="variabel.js"></script>
     <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
+    <!-- <script src="vendor/chart.js/Chart.min.js"></script> -->
 
     <!-- Page level custom scripts -->
     <!-- <script src="js/demo/chart-area-demo.js"></script>

@@ -48,13 +48,13 @@ const getCiriVariabelData = async () => {
       modalEdit.innerHTML = "Edit";
       // Edit Ciri Variabel data event listener
       modalEdit.addEventListener("click", async () => {
-        getVariabel();
-        document.getElementById("exampleModalLabel").innerText = `Edit Ciri Variabel #${element.id}`;
-        editedCiriVariabelId = element.id;
+      
+      document.getElementById("exampleModalLabel").innerText = `Edit Ciri Variabel #${element.id}`;
+      editedCiriVariabelId = element.id;
 
-        let editContent = `
+      let editContent = `
       <div style="margin-left: 10px; margin-right: 10px;">
-        <form id="ciriVariabelForm">
+        <form id="ciriVariabelEditForm">
         <div class="mb-3">
           <label class="form-label">Kode</label>
           <input type="text" name="kode" id="kodeCiriVariabel" class="form-control" value="${element.kode}" required>
@@ -65,8 +65,8 @@ const getCiriVariabelData = async () => {
       </div>
         <div class="mb-3">
               <label for="variabelData" class="form-label">Variabel</label>
-              <select name="id_variabel" class="form-control" id="variabel" class="idVariabel" required> 
-                  <option value="" disabled selected hidden>Pilih Variabel</option>
+              <select name="id_variabel" class="form-control" id="variabelData" class="idVariabel" required> 
+              <option value="" disabled selected hidden>Pilih Variabel</option>
               </select>
           </div>
         <div class="mb-3">
@@ -90,8 +90,40 @@ const getCiriVariabelData = async () => {
         </form>
       </div>
       `;
+      
+      document.querySelector(".modal-body").innerHTML = editContent;
+      const response = await fetch("http://localhost:3000/api/data/variabel");
+      const result = await response.json();
+      
+      const select = document.getElementById("variabelData");
 
-        document.querySelector(".modal-body").innerHTML = editContent;
+      result.data.forEach((item) => {
+        let option = document.createElement("option");
+        option.value = item.id;
+        option.textContent = item.variabel;
+        option.dataset.id = item.id;
+        select.appendChild(option);
+        });
+
+        let formEditData = document.getElementById("ciriVariabelEditForm");
+        formEditData.addEventListener("submit", (e) => {
+          try{
+            const ciriVariabelData = Object.fromEntries(new FormData(formEditData));
+            console.log(ciriVariabelData);
+  
+            const updateData = fetch(`http://localhost:3000/api/data/updateCiriVariabel/${editedCiriVariabelId}`, {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(ciriVariabelData),
+            });
+            if (updateData.ok) window.location.reload();
+          } catch (e){
+            console.error(e);
+            alert(`Terjadi kesalahan: ${e.message}`);
+          }
+        })
       });
 
       no.innerText = i++;

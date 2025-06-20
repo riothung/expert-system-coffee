@@ -117,6 +117,27 @@ const insertCiriVariabel = async (req, res) => {
   }
 };
 
+const insertVariabelReal = async (req, res) => {
+  try {
+    const { kode, variabel, pasca_panen } = req.body;
+    const insertData = await prisma.variabel.create({ 
+      data: {
+        kode: kode, 
+        variabel: variabel,
+        pasca_panen: pasca_panen
+      }
+    });
+    if (insertData)
+      return res.status(200).json({
+        insertedData: insertData,
+        message: "Data inserted successfully",
+      });
+  } catch (e) {
+    console.error(e);
+    return res.status(400).json({ message: e.message });
+  }
+}
+
 const insertCiriVariabelReal = async (req, res) => {
   try {
     const { kode, ciri, id_variabel, pasca_panen, bobot } = req.body;
@@ -417,10 +438,71 @@ const getHasilPengujianPengguna = async (req, res) => {
 // End of GET Method
 
 // PUT Method
+const updateVariabelData = async (req, res) => {
+  try{
+    const id = parseInt(req.params.id);
+    const { kode, variabel, pasca_panen } = req.body;
+    const updateData = await prisma.variabel.update({
+      where: {
+        id: id,
+      },
+      data: {
+        kode: kode,
+        variabel: variabel,
+        pasca_panen: pasca_panen,
+      },
+    });
+    if(updateData) return res.status(200).json({message: "Data updated successfully"});
+  } catch (e) {
+    console.error(e)
+    return res.status(400).json({message: e.message})
+  }
+}
 
+const updateCiriVariabelData = async (req, res) => {
+  try{
+    const id = parseInt(req.params.id);
+    const { kode, ciri, id_variabel, pasca_panen, bobot } = req.body;
+
+    const updateData = await prisma.ciriVariabel.update({
+      where: {
+        id: id,
+      },
+      data:{
+        kode: kode,
+        ciri: ciri,
+        id_variabel: parseInt(id_variabel),
+        pasca_panen: pasca_panen,
+        bobot: parseInt(bobot),
+      }
+    })
+
+    if(updateData) return res.status(200).json({ message: "Data updated successfully" });
+  } catch (e){
+    console.error(e)
+    return res.status(400).json({message: e.message})
+  }
+}
 // End of PUT Method
 
 // DELETE Method
+const deleteVariabel = async (req, res) => {
+  try{
+    const id = req.params.id;
+
+    const deleteData = await prisma.variabel.delete({
+      where: {
+        id: parseInt(id),
+      },
+    });
+    if(deleteData) return res.status(200).json({message: "Data deleted successfully"});
+  }catch(e){
+    console.error(e)
+    return res.status(400).json({message: e.message})
+  }
+
+}
+
 const deleteCiriVariabel = async (req, res) => {
   try {
     const id = req.params.id;
@@ -465,6 +547,7 @@ const deleteHasilPengujian = async (req, res) => {
 module.exports = {
   insertUser,
   insertVariabel,
+  insertVariabelReal,
   insertCiriVariabel,
   insertCiriVariabelReal,
   insertPengujian,
@@ -475,6 +558,9 @@ module.exports = {
   getHasilPengujian,
   getHasilPengujianPengguna,
   // getHasilPengujianUser,
+  updateVariabelData,
+  updateCiriVariabelData,
+  deleteVariabel,
   deleteCiriVariabel,
   deleteHasilPengujian,
 };
