@@ -59,8 +59,9 @@ model Pengujian {
 model HasilPengujian {
     id Int @id @default(autoincrement())
     date DateTime @default(now())
-    id_user Int
-    user User @relation(fields: [id_user], references: [id])
+    id_user Int?
+    user User? @relation(fields: [id_user], references: [id])
+    pengguna String?
     score Int
     output String
     pengujian Pengujian[]

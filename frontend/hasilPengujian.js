@@ -127,7 +127,7 @@ const getHasilPengujian = async () => {
       // Use the formatted date in your table
       no.innerHTML = i++;
       date.innerHTML = formattedDate;
-      name.innerHTML = element.user.username;
+      name.innerHTML = name.innerHTML = (element.user?.username || element.pengguna || "Nama tidak tersedia");
 
       // Ambil pasca_panen selain "Umum"
       const jenisPasca = element.pengujian.find((value) => ["natural", "honey", "washed"].includes(value.ciriVariabel.pasca_panen.toLowerCase()));

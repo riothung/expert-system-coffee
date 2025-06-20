@@ -7,6 +7,7 @@ router.get("/variabel", data.getVariabel);
 router.get("/ciriVariabel", data.getCiriVariabel);
 router.get("/dataNatural", data.getDataNatural);
 router.get("/hasilPengujian", data.getHasilPengujian);
+// router.get("hasilPengujianUser", data.getHasilPengujianUser);
 
 // router.get("/variabel", verifyToken, data.getVariabel);
 // router.get("/ciriVariabel", verifyToken, data.getCiriVariabel);
@@ -19,6 +20,7 @@ router.post("/addUser", data.insertUser);
 router.post("/addVariabel", data.insertVariabel);
 router.post("/addCiriVariabel", data.insertCiriVariabel);
 router.post("/addPengujian", data.insertPengujian);
+router.post("/addPengujianPengguna", data.insertPengujianPengguna);
 router.post("/addCiriVariabelReal", data.insertCiriVariabelReal);
 
 // router.post("/addUser", data.insertUser);
