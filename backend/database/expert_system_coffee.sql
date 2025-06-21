@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2025 at 04:31 PM
+-- Generation Time: Jun 21, 2025 at 09:34 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -53,7 +53,7 @@ INSERT INTO `cirivariabel` (`id`, `kode`, `ciri`, `id_variabel`, `pasca_panen`, 
 (44, 'CK10', 'Rasa yang ditinggalkan halus dan tidak mengganggu di mulut', 8, 'Umum', 80),
 (45, 'CK11', 'Rasa yang ditinggalkan menonjolkan nuansa manis, floral, atau fruity yang tidak mendominasi', 8, 'Umum', 90),
 (46, 'CK12', 'Rasa yang ditinggalkan cenderung tidak harmonis misalnya rasa asam yang lebih mendominasi ataupun pahit berlebih', 9, 'Umum', 60),
-(47, 'CK13', 'Rasa yang ditinggalkan cenderung lebih cepat di mulut', 9, 'Umum', 70),
+(47, 'CK13', 'Rasa yang ditinggalkan cenderung lebih cepat hilang di mulut', 9, 'Umum', 70),
 (48, 'CK14', 'Rasa /flavor menampilkan beragam elemen rasa yang terasa secara bertahan dan berlapis-lapis', 10, 'Umum', 80),
 (49, 'CK15', 'Memiliki kombinasi rasa yang kaya seperti buah-buahan, floral, rempah, dan manis', 10, 'Umum', 90),
 (50, 'CK16', 'Rasa/flavor memiliki lapisan rasa yang sedikit dan cenderung lebih dominan pada salah satu rasa misalnya asam atau manis', 11, 'Umum', 70),
@@ -86,21 +86,10 @@ CREATE TABLE `hasilpengujian` (
   `id` int(11) NOT NULL,
   `date` datetime(3) NOT NULL DEFAULT current_timestamp(3),
   `id_user` int(11) NOT NULL,
+  `pengguna` varchar(191) NOT NULL,
   `score` int(11) NOT NULL,
   `output` varchar(191) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `hasilpengujian`
---
-
-INSERT INTO `hasilpengujian` (`id`, `date`, `id_user`, `score`, `output`) VALUES
-(1, '2025-04-08 07:38:39.152', 1, 80, 'Memuaskan'),
-(2, '2025-04-14 07:13:12.811', 1, 80, 'Memuaskan'),
-(3, '2025-04-15 05:04:26.781', 1, 80, 'Memuaskan'),
-(4, '2025-04-15 05:06:27.695', 1, 80, 'Memuaskan'),
-(5, '2025-04-15 05:07:27.803', 1, 80, 'Memuaskan'),
-(6, '2025-04-15 05:08:56.067', 1, 80, 'Memuaskan');
 
 -- --------------------------------------------------------
 
@@ -110,47 +99,10 @@ INSERT INTO `hasilpengujian` (`id`, `date`, `id_user`, `score`, `output`) VALUES
 
 CREATE TABLE `pengujian` (
   `id` int(11) NOT NULL,
+  `form` int(11) NOT NULL,
   `id_ciriVariabel` int(11) NOT NULL,
-  `id_hasilPengujian` int(11) NOT NULL,
-  `form` int(11) NOT NULL
+  `id_hasilPengujian` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `pengujian`
---
-
-INSERT INTO `pengujian` (`id`, `id_ciriVariabel`, `id_hasilPengujian`, `form`) VALUES
-(1, 35, 1, 80),
-(2, 37, 1, 60),
-(3, 40, 1, 80),
-(4, 44, 1, 80),
-(5, 48, 1, 80),
-(6, 52, 1, 90),
-(7, 54, 1, 80),
-(8, 56, 1, 90),
-(9, 60, 1, 80),
-(10, 66, 1, 80),
-(11, 35, 2, 80),
-(12, 38, 2, 60),
-(13, 40, 2, 80),
-(14, 44, 2, 80),
-(15, 48, 2, 80),
-(16, 52, 2, 90),
-(17, 54, 2, 80),
-(18, 56, 2, 90),
-(19, 62, 2, 80),
-(20, 66, 2, 80),
-(21, 35, 5, 80),
-(22, 35, 6, 80),
-(23, 39, 6, 60),
-(24, 40, 6, 80),
-(25, 44, 6, 80),
-(26, 48, 6, 80),
-(27, 52, 6, 90),
-(28, 54, 6, 80),
-(29, 56, 6, 90),
-(30, 64, 6, 80),
-(31, 66, 6, 80);
 
 -- --------------------------------------------------------
 
@@ -171,7 +123,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `email`, `password`, `isAdmin`) VALUES
-(1, 'nicky', 'nicky@gmail.com', '$2b$10$uv1bSR2i9aYQ1mIWW0yK5OqcWoBYjN4Pg.zWfsuXHYOZ.bRJ4W7HW', 0);
+(1, 'nicky', 'nicky@gmail.com', '$2b$10$nUXYM3Z6at4UE2JWJbUHDue2/IoHomZDNH1FMnKLJKBnvuk8A4ZRG', 0);
 
 -- --------------------------------------------------------
 
@@ -267,13 +219,13 @@ ALTER TABLE `cirivariabel`
 -- AUTO_INCREMENT for table `hasilpengujian`
 --
 ALTER TABLE `hasilpengujian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pengujian`
 --
 ALTER TABLE `pengujian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -308,7 +260,7 @@ ALTER TABLE `hasilpengujian`
 --
 ALTER TABLE `pengujian`
   ADD CONSTRAINT `Pengujian_id_ciriVariabel_fkey` FOREIGN KEY (`id_ciriVariabel`) REFERENCES `cirivariabel` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `Pengujian_id_hasilPengujian_fkey` FOREIGN KEY (`id_hasilPengujian`) REFERENCES `hasilpengujian` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `Pengujian_id_hasilPengujian_fkey` FOREIGN KEY (`id_hasilPengujian`) REFERENCES `hasilpengujian` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
