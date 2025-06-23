@@ -18,10 +18,12 @@ const responseLogin = async () => {
     });
     const json = await data.json();
     console.log(json);
-    if (data.ok) return (window.location.href = "./index.html");
-    // .then((data) => {
-    //   console.log(data.json());
-    // });
+    if (data.ok) {
+      alert("Login Berhasil!")
+      window.location.href = "./index.html";
+    }else{
+      alert(`Login Gagal! ${data.message}`)
+    }
   } catch (e) {
     console.error(e);
     alert("An error occurred. Please try again later.", e.message);

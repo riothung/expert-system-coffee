@@ -228,45 +228,16 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a type="submit" class="btn btn-primary" id="logoutButton" href="login.html">Logout</a>
           </div>
         </div>
       </div>
     </div>
     
-    <!-- <script>
-      
-      function openChildModal(modalId) {
-        let parentModal = new bootstrap.Modal(document.getElementById('mulaiModal'));
-        console.log(modalId)
-        // let closeParentModal = button.getAttribute('data-bs-dismiss')
-        let childModal = new bootstrap.Modal(document.getElementById(modalId));
-        // parentModal.hide(); // Hide parent modal
-        
-        // Add delay biar parent modal beneran tertutup dulu
-        // if(childModal){
-          //   console.log(closeParentModal)
-          //   console.log("test")  
-          //   closeParentModal
-          //     // closeParentModal
-          //     }  
-          
-          setTimeout(() => {
-             // Show child modal
-            if(childModal.show()){
-              
-            }
-            // console.log("test", childModal)
-          }, 500); // Delay 0.5 detik biar smooth
-          // childModal._config.backdrop = 'static';
-      // childModal._config.keyboard = false;
-    }
-
-    </script> -->
-
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -274,12 +245,13 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
+    <script src="auth/auth.js"></script>
+
+    <!-- Page level plugins
     <script src="vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script> -->
   </body>
 </html>

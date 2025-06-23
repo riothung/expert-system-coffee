@@ -20,8 +20,8 @@ app.use(cookieParser());
 app.use(
   cors({
     credentials: true,
-    origin: "*",
-    // origin: ["http://localhost:3000", "http://127.0.0.1:5500"],
+    // origin: "*",
+    origin: "http://127.0.0.1:5500"
   })
 );
 
