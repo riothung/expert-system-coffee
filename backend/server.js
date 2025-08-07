@@ -42,6 +42,11 @@ app.use(
 
 app.use("/api", router);
 
+app.get("/api/check-token", (req, res) => {
+  console.log(req.cookies)
+  res.json({ cookies: req.cookies })
+})
+
 app.listen(PORT, () => {
   console.log(`Server is listening in port ${PORT}`);
 });

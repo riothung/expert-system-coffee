@@ -17,7 +17,8 @@ const responseLogin = async () => {
       body: JSON.stringify({ email, password }),
     });
     const json = await data.json();
-    console.log(json);
+    console.log("Response: ", json);
+    console.log("Cookies: ", document.cookie)
     if (data.ok) {
       alert("Login Berhasil!")
       window.location.href = "./index.html";
