@@ -19,12 +19,24 @@ const responseLogin = async () => {
     const json = await data.json();
     console.log("Response: ", json);
     console.log("Cookies: ", document.cookie)
-    if (data.ok) {
-      alert("Login Berhasil!")
-      window.location.href = "./index.html";
-    }else{
-      alert(`Login Gagal! ${data.message}`)
+    // if (data.ok) {
+    //   alert("Login Berhasil!")
+    //   window.location.href = "./index.html";
+    // }else{
+    //   alert(`Login Gagal! ${data.message}`)
+    // }
+    if(data.ok) {
+      alert("Login berhasil")
+      fetch("http://localhost:3000/api/check-token", {
+        method: "GET", 
+        credentials: "include", 
+      })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.error("Error: ", err.message))
     }
+
+    // if(data.ok) return alert("Login Berhasil!")
   } catch (e) {
     console.error(e);
     alert("An error occurred. Please try again later.", e.message);
