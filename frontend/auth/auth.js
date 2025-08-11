@@ -32,7 +32,8 @@ const responseLogin = async () => {
         credentials: "include", 
       })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => console.log("Ini cookies: ",  data))
+      .then(() => window.location.href = "./index.html?tempToken=${encodeURIComponent(json.tempToken)}")
       .catch((err) => console.error("Error: ", err.message))
     }
 

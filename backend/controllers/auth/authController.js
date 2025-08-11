@@ -65,8 +65,8 @@ const login = async (req, res) => {
 
       return res
       .cookie("token", token, { httpOnly: true, sameSite: "Lax", secure: false, maxAge: 24 * 60 * 60 * 1000 })
-      .status(201)
-      .json({ message: "Login Success" });
+      .status(200)
+      .json({ message: "Login Success", tempToken: token });
     }
   } catch (error) {
     console.error(error);
