@@ -25,18 +25,26 @@ const responseLogin = async () => {
     // }else{
     //   alert(`Login Gagal! ${data.message}`)
     // }
-    if(data.ok) {
-      alert("Login berhasil")
-      fetch("http://localhost:3000/api/check-token", {
-        method: "GET", 
-        credentials: "include", 
-      })
-      .then((res) => res.json())
-      .then((data) => console.log("Ini cookies: ",  data))
-      .then(() => window.location.href = "./index.html?tempToken=${encodeURIComponent(json.tempToken)}")
-      .catch((err) => console.error("Error: ", err.message))
-    }
+    // if(data.ok) {
+    //   alert("Login berhasil")
+    //   fetch("http://localhost:3000/api/check-token", {
+    //     method: "GET", 
+    //     credentials: "include", 
+    //   })
+    //   .then((res) => res.json())
+    //   .then((data) => console.log("Ini cookies: ",  data))
+    //   .then(() => window.location.href = "./index.html?tempToken=${encodeURIComponent(json.tempToken)}")
+    //   .catch((err) => console.error("Error: ", err.message))
+    // }
 
+    if(data.ok){
+      localStorage.setItem("token", json.token)
+
+      alert("Login Berhasil!")
+      window.location.href = "./index.html"
+    }else{
+      alert("Login Gagal! Silahkan coba lagi")
+    }
     // if(data.ok) return alert("Login Berhasil!")
   } catch (e) {
     console.error(e);
