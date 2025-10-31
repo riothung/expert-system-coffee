@@ -63,7 +63,16 @@ const login = async (req, res) => {
       };
       const token = jwt.sign(tokenPayload, process.env.TOKEN_SECRET, { expiresIn: "1 day" });
 
-      return res.cookie("token", token, { httpOnly: true, sameSite: "Lax", secure: false }).status(201).json({ message: "Login Success" });
+      // return res
+      // .cookie("token", token, { httpOnly: true, sameSite: "Lax", secure: false, maxAge: 24 * 60 * 60 * 1000 })
+      // .status(200)
+      // .json({ message: "Login Success", tempToken: token });
+      return res
+      .status(200)
+      .json({
+        message: "Login Success",
+        token,
+      })
     }
   } catch (error) {
     console.error(error);

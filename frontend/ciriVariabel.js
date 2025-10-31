@@ -1,8 +1,18 @@
+const { get } = require("browser-sync");
+
 // GET ciri variabel data and inserted in table
 const ciriVariabelTable = document.getElementById("ciriVariabel");
 const getCiriVariabelData = async () => {
   try {
-    const ciriVariabelData = await fetch("http://localhost:3000/api/data/ciriVariabel");
+    const token = localStorage.getItem("token")
+
+    const ciriVariabelData = await fetch("http://localhost:3000/api/data/ciriVariabel", {
+      method: "GET", 
+      headers: {
+        "Content-Type": "application/json", 
+        "Authorization": `Bearer ${token}`
+      },
+    });
     const convertToJson = await ciriVariabelData.json();
     console.log(convertToJson);
     let i = 1;

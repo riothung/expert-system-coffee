@@ -21,7 +21,7 @@ app.use(
   cors({
     credentials: true,
     // origin: "*",
-    origin: "http://127.0.0.1:5500"
+    origin: ["http://127.0.0.1:5500", "http://localhost:3000"]
   })
 );
 
@@ -41,6 +41,20 @@ app.use(
 );
 
 app.use("/api", router);
+
+app.get("/api/check-token", (req, res) => {
+  console.log()
+  res.json({ cookies: req.cookies })
+})
+
+app.get("/api/read-cookies", (req, res) => {
+  const myCookie = req.cookies.myCookie
+  if(myCookie){
+    res.send(`Cookie's value: ${myCookie}`)
+  }else{
+    res.send(`No cookie found!`)
+  }
+})
 
 app.listen(PORT, () => {
   console.log(`Server is listening in port ${PORT}`);

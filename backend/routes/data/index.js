@@ -1,6 +1,10 @@
 const router = require("express").Router();
 const data = require("../../controllers/data/data.js");
+const token = require("../../middleware/authMiddleware.js")
 // const { verifyToken, isAdmin } = require("../../middleware/authMiddleware.js");
+
+// Cookies Test
+router.post("/verify-token", token.verifyToken)
 
 // Method GET
 router.get("/variabel", data.getVariabel);
