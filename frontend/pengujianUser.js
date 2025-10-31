@@ -107,8 +107,7 @@ function showHasilModal(data) {
 
   modalElement.querySelector(".modal-body").innerHTML = tableContent;
   modalElement.querySelector(".modal-title").innerText = `Detail Hasil Pengujian #${data.id}`;
-  $(modalElement).modal('show'); // Bootstrap 4 way
-
+  $(modalElement).modal("show"); // Bootstrap 4 way
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -121,7 +120,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-
 
 const formNatural = async () => {
   try {
@@ -158,11 +156,11 @@ const formNatural = async () => {
     console.log(totalScore, "ini total score");
 
     function theOutput(output) {
-      if (totalScore >= 65 && totalScore <= 74) {
+      if (totalScore >= 65 && totalScore < 75) {
         output += "Kurang Memuaskan";
-      } else if (totalScore >= 75 && totalScore <= 84) {
+      } else if (totalScore >= 75 && totalScore < 85) {
         output += "Memuaskan";
-      } else if (totalScore >= 85 && totalScore <= 94) {
+      } else if (totalScore >= 85 && totalScore <= 88) {
         output += "Sangat Memuaskan";
       } else {
         output += "Score tidak memenuhi!";
@@ -196,7 +194,7 @@ const formNatural = async () => {
       if (!naturalModalInstance) {
         naturalModalInstance = new bootstrap.Modal(modalElement);
       }
-      $(modalElement).modal('hide'); // jQuery Bootstrap 4 way
+      $(modalElement).modal("hide"); // jQuery Bootstrap 4 way
 
       // Tampilkan hasil
       showHasilModal(responseData.data);
@@ -206,8 +204,6 @@ const formNatural = async () => {
     alert(`Terjadi Kesalahan, Error: ${e.message}`);
   }
 };
-
-
 
 // Listener saat form disubmit
 document.addEventListener("DOMContentLoaded", () => {
@@ -252,7 +248,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-
 // End of Pasca Panen Natural
 
 // function that pass the honey's form datas
@@ -291,9 +286,9 @@ const formHoney = async () => {
     console.log(totalScore, "ini total score");
 
     function theOutput(output) {
-      if (totalScore >= 65 && totalScore <= 73) {
+      if (totalScore >= 65 && totalScore < 74) {
         output += "Kurang Memuaskan";
-      } else if (totalScore >= 74 && totalScore <= 81) {
+      } else if (totalScore >= 74 && totalScore < 82) {
         output += "Memuaskan";
       } else if (totalScore >= 82 && totalScore <= 88) {
         output += "Sangat Memuaskan";
@@ -321,7 +316,7 @@ const formHoney = async () => {
       body: JSON.stringify({ form: result }),
     });
 
-   if (postResponse.ok) {
+    if (postResponse.ok) {
       const responseData = await postResponse.json();
 
       console.log("Response dari server:", responseData);
@@ -331,7 +326,7 @@ const formHoney = async () => {
       if (!naturalModalInstance) {
         naturalModalInstance = new bootstrap.Modal(modalElement);
       }
-      $(modalElement).modal('hide'); // jQuery Bootstrap 4 way
+      $(modalElement).modal("hide"); // jQuery Bootstrap 4 way
 
       // Tampilkan hasil
       showHasilModal(responseData.data);
@@ -429,9 +424,9 @@ const formWashed = async () => {
     result["score"] = totalScore;
 
     function theOutput(output) {
-      if (totalScore >= 65 && totalScore <= 73) {
+      if (totalScore >= 65 && totalScore < 74) {
         output += "Kurang Memuaskan";
-      } else if (totalScore >= 74 && totalScore <= 81) {
+      } else if (totalScore >= 74 && totalScore < 82) {
         output += "Memuaskan";
       } else if (totalScore >= 82 && totalScore <= 88) {
         output += "Sangat Memuaskan";
@@ -467,7 +462,7 @@ const formWashed = async () => {
       if (!naturalModalInstance) {
         naturalModalInstance = new bootstrap.Modal(modalElement);
       }
-      $(modalElement).modal('hide'); // jQuery Bootstrap 4 way
+      $(modalElement).modal("hide"); // jQuery Bootstrap 4 way
 
       // Tampilkan hasil
       showHasilModal(responseData.data);
@@ -477,7 +472,6 @@ const formWashed = async () => {
     alert(`Terjadi Kesalahan, Error: ${e.message}`);
   }
 };
-
 
 document.addEventListener("DOMContentLoaded", () => {
   const modalWashed = document.getElementById("pengujianWashed");
