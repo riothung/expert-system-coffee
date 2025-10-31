@@ -43,6 +43,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // End of function that handle checkbox
 
+// function handleGeneralOutput(){
+//   switch(true){ }
+// }
+
 // function that pass the natural's form datas
 
 const formNatural = async () => {
@@ -78,7 +82,7 @@ const formNatural = async () => {
         output += "Memuaskan";
         result["score"] = totalScore;
         result["output"] = output;
-      } else if (totalScore >= 85 && totalScore <= 94) {
+      } else if (totalScore >= 85 && totalScore <= 88) {
         output += "Sangat Memuaskan";
         result["score"] = totalScore;
         result["output"] = output;
@@ -320,6 +324,20 @@ const formWashed = async () => {
     console.log(totalScore, "ini total score");
 
     function theOutput(output) {
+      //   switch (true) {
+      //     case (totalScore >= 65 && totalScore <= 73):
+      //       output += "Kurang Memuaskan";
+      //       result["score"] = totalScore;
+      //       result["output"] = output;
+      //     break;
+      //     case (totalScore >= 74 && totalScore <= 73):
+      //       output += "Memuaskan"
+      //       result['score'] = totalScore
+      //       result['output'] = output
+      //     break;
+      //     case ()
+      //   }
+
       if (totalScore >= 65 && totalScore <= 73) {
         output += "Kurang Memuaskan";
         result["score"] = totalScore;
