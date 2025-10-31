@@ -74,11 +74,11 @@ const formNatural = async () => {
     console.log(totalScore, "ini total score");
 
     function theOutput(output) {
-      if (totalScore >= 65 && totalScore <= 74) {
+      if (totalScore >= 65 && totalScore < 75) {
         output += "Kurang Memuaskan";
         result["score"] = totalScore;
         result["output"] = output;
-      } else if (totalScore >= 75 && totalScore <= 84) {
+      } else if (totalScore >= 75 && totalScore < 85) {
         output += "Memuaskan";
         result["score"] = totalScore;
         result["output"] = output;
@@ -199,11 +199,11 @@ const formHoney = async () => {
     console.log(totalScore, "ini total score");
 
     function theOutput(output) {
-      if (totalScore >= 65 && totalScore <= 73) {
+      if (totalScore >= 65 && totalScore < 74) {
         output += "Kurang Memuaskan";
         result["score"] = totalScore;
         result["output"] = output;
-      } else if (totalScore >= 74 && totalScore <= 81) {
+      } else if (totalScore >= 74 && totalScore < 82) {
         output += "Memuaskan";
         result["score"] = totalScore;
         result["output"] = output;
@@ -338,11 +338,11 @@ const formWashed = async () => {
       //     case ()
       //   }
 
-      if (totalScore >= 65 && totalScore <= 73) {
+      if (totalScore >= 65 && totalScore < 74) {
         output += "Kurang Memuaskan";
         result["score"] = totalScore;
         result["output"] = output;
-      } else if (totalScore >= 74 && totalScore <= 81) {
+      } else if (totalScore >= 74 && totalScore < 82) {
         output += "Memuaskan";
         result["score"] = totalScore;
         result["output"] = output;
